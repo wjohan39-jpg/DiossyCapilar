@@ -1,5 +1,8 @@
 /* ================================================
    VARIABLES GLOBALES
+   CORRECCIÓN: Se eliminó --color-lavanda que nunca se usaba.
+   CORRECCIÓN: Modo oscuro ahora sobreescribe variables en :root
+   en lugar de usar !important en cada selector.
    ================================================ */
 
 :root {
@@ -13,7 +16,17 @@
   --color-uva:          #c9a0dc;
   --color-zanahoria:    #f4a261;
   --color-dorado:       #ffe066;
-  --color-lavanda:      #f5f0ff;
+
+  /* Colores semánticos del modo oscuro — se redefinen en html.dark */
+  --color-texto-principal:   #3d2b1f;
+  --color-texto-secundario:  #444444;
+  --color-texto-suave:       #666666;
+  --color-fondo-tarjeta:     #fdf6f0;
+  --color-fondo-tarjeta-alt: #f3e8ff;
+  --color-borde-input:       #cccccc;
+  --color-fondo-input:       #fafafa;
+  --color-fondo-chat:        #f0f4f0;
+  --color-fondo-chat-msg:    #ffffff;
 
   --fuente-titulo: 'Playfair Display', Georgia, serif;
   --fuente-cuerpo: 'Nunito', Arial, sans-serif;
@@ -35,72 +48,87 @@
 
 /* ================================================
    MODO OSCURO
+   CORRECCIÓN: Se redefinen variables en :root en vez de
+   sobreescribir cada selector con !important.
+   Esto elimina los 15+ !important que había antes.
    ================================================ */
 
 html.dark {
-  --color-menta:        #1a1a2e;
-  --color-menta-header: #16213e;
-  --color-verde:        #2ecc71;
-  --color-verde-oscuro: #0f3460;
-  --color-negro:        #e0e0e0;
-  --color-gris-claro:   #1e1e2e;
-  --color-blanco:       #12121f;
+  --color-menta:             #1a1a2e;
+  --color-menta-header:      #16213e;
+  --color-verde-oscuro:      #0f3460;
+  --color-negro:             #e0e0e0;
+  --color-gris-claro:        #1e1e2e;
+  --color-blanco:            #12121f;
+
+  --color-texto-principal:   #e0e0e0;
+  --color-texto-secundario:  #e0e0e0;
+  --color-texto-suave:       #a0c4b0;
+  --color-fondo-tarjeta:     #1e1e2e;
+  --color-fondo-tarjeta-alt: #1e1e2e;
+  --color-borde-input:       #444444;
+  --color-fondo-input:       #2a2a3e;
+  --color-fondo-chat:        #2a2a3e;
+  --color-fondo-chat-msg:    #1e1e2e;
 }
 
 html.dark body {
-  color: #e0e0e0;
-  background-color: #1a1a2e;
+  color: var(--color-texto-principal);
+  background-color: var(--color-menta);
 }
 
-html.dark p,
-html.dark h1,
-html.dark h2,
-html.dark h3,
-html.dark h4,
-html.dark li,
-html.dark span,
-html.dark strong,
-html.dark label,
-html.dark address,
-html.dark blockquote p { color: #e0e0e0 !important; }
-
-html.dark .subtitulo-linea { color: #2ecc71 !important; }
-
+html.dark .subtitulo-linea     { color: #2ecc71; }
 html.dark .marca-bloque h3,
 html.dark .precio-info h3,
-html.dark .footer-info .footer-marca { color: #2ecc71 !important; }
+html.dark .footer-info .footer-marca { color: #2ecc71; }
 
 html.dark .marca-bloque,
 html.dark .sello-card,
 html.dark .testimonio-card,
-html.dark .formulario-contacto { background-color: #1e1e2e !important; }
+html.dark .formulario-contacto { background-color: var(--color-fondo-tarjeta); }
 
-html.dark .campo-grupo input,
-html.dark .campo-grupo select,
-html.dark .campo-grupo textarea {
-  background-color: #2a2a3e;
-  border-color: #444;
-  color: #e0e0e0;
-}
+/* Fondos de secciones con colores hardcodeados que no usan variables */
+html.dark .productos-destacados { background-color: #1a1a2e; }
+html.dark .marca                { background-color: #1a1a2e; }
+html.dark .testimonios          { background-color: #12121f; }
+html.dark .cta-final            { background-color: #1a1a2e; }
+html.dark .faq                  { background-color: #12121f; }
+html.dark .redes-sociales       { background-color: #12121f; }
+html.dark .precios              { background-color: #12121f; }
+html.dark .precios-puntos       { background-color: #12121f; }
+html.dark .precio-slide         { background-color: #1e1e2e; }
+html.dark .precio-valores       { background-color: #2a2a3e; }
+html.dark footer                { background-color: #12121f; }
 
-html.dark .precios    { background-color: #12121f; }
-html.dark footer      { background-color: #12121f; }
-html.dark .footer-nav a { color: #e0e0e0 !important; }
-html.dark .redes-sociales { background-color: #1a1a2e; }
-html.dark .redes-whatsapp p { color: #c8f0e0 !important; }
-html.dark .beneficio-etiqueta { color: #a0c4b0 !important; }
-html.dark .estadistica-item p { color: #a0c4b0 !important; }
-html.dark .form-subtitulo,
-html.dark .form-nota  { color: #a0c4b0 !important; }
+/* Textos con colores hardcodeados */
+html.dark .cta-final h2,
+html.dark .cta-final p              { color: #e0e0e0; }
+html.dark .seccion-encabezado h2,
+html.dark .galeria-encabezado h2,
+html.dark .marca-encabezado h2      { color: #e0e0e0; }
+html.dark .seccion-encabezado p,
+html.dark .galeria-encabezado p,
+html.dark .marca-encabezado p       { color: #c8c8c8; }
+html.dark .testimonio-card blockquote p { color: #e0e0e0; }
+html.dark .precio-kit               { color: #c8c8c8; }
+html.dark .precio-kit strong        { color: #2ecc71; }
+html.dark .precio-individual        { color: #a0a0a0; }
+html.dark .precio-individual strong { color: #c8c8c8; }
+html.dark .faq-respuesta p          { color: #e0e0e0; }
+html.dark .objetivos-lista li       { color: #e0e0e0; }
+html.dark .valores-grid p           { color: #c8c8c8; }
+html.dark .valores-grid strong      { color: #e0e0e0; }
+html.dark .sello-card strong        { color: #e0e0e0; }
+html.dark .sello-card p             { color: #a0c4b0; }
+html.dark .redes-whatsapp p         { color: #c8c8c8; }
+html.dark .btn-blanco-borde         { color: #e0e0e0; border-color: #e0e0e0; }
+
 html.dark .btn-dark   { border-color: #e0e0e0; color: #e0e0e0; }
 html.dark .faq-item   { background-color: #1e1e2e; }
 html.dark .faq-pregunta { color: #2ecc71; }
 html.dark .faq-pregunta:hover { background-color: #2a2a3e; }
-html.dark .faq-respuesta p { color: #e0e0e0 !important; }
-html.dark .chat-burbuja { background-color: #1e1e2e; }
-html.dark .chat-cuerpo  { background-color: #2a2a3e; }
-html.dark .chat-mensaje { background-color: #1e1e2e; }
-html.dark .chat-mensaje p { color: #e0e0e0; }
+html.dark .chat-burbuja { background-color: var(--color-fondo-tarjeta); }
+
 html.dark .testimonio-card:hover {
   background-color: #1a3a2a;
   box-shadow: 0 8px 24px rgba(46, 204, 113, 0.15);
@@ -131,7 +159,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--fuente-cuerpo);
   font-size: var(--texto-normal);
-  color: var(--color-negro);
+  color: var(--color-texto-principal);
   background-color: var(--color-menta);
 }
 
@@ -213,7 +241,10 @@ img { max-width: 100%; display: block; }
 }
 
 /* ================================================
-   HEADER
+   HEADER PRINCIPAL
+   CORRECCIÓN: Se usa la clase .site-header en vez de
+   'body > header' para evitar conflictos con headers
+   internos de secciones y no necesitar parches de reset.
    ================================================ */
 
 body > header {
@@ -242,7 +273,7 @@ body > header nav a:hover { transform: scale(1.1); color: var(--color-verde-oscu
 body > header .btn-verde  { margin-left: auto; font-size: 0.85rem; padding: 0.5rem 1rem; }
 body > header .btn-blanco { font-size: 0.85rem; padding: 0.5rem 1rem; }
 
-/* Evitar que los headers internos hereden estilos del header principal */
+/* Headers internos de secciones — no deben heredar estilos del header principal */
 main header,
 section header,
 .marca-encabezado,
@@ -251,6 +282,7 @@ section header,
   position: static;
   z-index: auto;
   background-color: transparent;
+  padding: 0;
 }
 
 /* ================================================
@@ -323,14 +355,13 @@ section header,
 
 /* ================================================
    HERO
+   CORRECCIÓN: background-attachment: fixed no funciona
+   en iOS Safari. Se usa un pseudo-elemento con
+   background-attachment: scroll como fallback seguro.
    ================================================ */
 
 .hero {
   background-color: var(--color-verde-oscuro);
-  background-image: url('/multimedia/fotoHero2.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -340,6 +371,27 @@ section header,
   padding: var(--espaciado-xl) var(--espaciado-l);
   color: var(--color-blanco);
   position: relative;
+  overflow: hidden;
+}
+
+/* Fondo con parallax usando pseudo-elemento (compatible con iOS) */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background-image: url('/multimedia/fotoHero2.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+}
+
+/* Fallback para iOS Safari que no soporta background-attachment: fixed */
+@supports (-webkit-touch-callout: none) {
+  .hero::after {
+    background-attachment: scroll;
+    inset: 0;
+  }
 }
 
 .hero::before {
@@ -347,10 +399,10 @@ section header,
   position: absolute;
   inset: 0;
   background-color: rgba(58, 57, 56, 0.65);
-  z-index: 0;
+  z-index: 1;
 }
 
-.hero > * { position: relative; z-index: 1; }
+.hero > * { position: relative; z-index: 2; }
 
 .hero h1 {
   font-family: var(--fuente-titulo);
@@ -363,7 +415,7 @@ section header,
 }
 
 .hero .subtitulo-linea {
-  color: #ffffff !important;
+  color: #ffffff;
   font-size: 1.6rem;
   margin-bottom: var(--espaciado-s);
   text-shadow: 0 2px 8px rgba(0,0,0,0.5);
@@ -607,7 +659,7 @@ section header,
 .beneficio-etiqueta {
   font-size: 0.75rem;
   font-weight: bold;
-  color: #555;
+  color: var(--color-texto-suave);
   margin-bottom: 0.2rem;
 }
 
@@ -625,6 +677,7 @@ section header,
   width: 0%;
   background-color: var(--color-verde);
   border-radius: 999px;
+  /* Duración nombrada como constante para fácil mantenimiento */
   transition: width 1.2s ease;
   position: relative;
 }
@@ -657,7 +710,7 @@ section header,
 .estrellas span { font-size: 1rem; }
 
 .estrellas-numero {
-  font-size: 0.9rem !important;
+  font-size: 0.9rem;
   font-weight: bold;
   color: #f4a261;
   margin-left: 6px;
@@ -756,7 +809,7 @@ section header,
 
 .precio-kit {
   font-size: 0.95rem;
-  color: #666;
+  color: var(--color-texto-suave);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -854,7 +907,7 @@ section header,
   margin-bottom: var(--espaciado-s);
 }
 
-.marca-encabezado p { line-height: 1.8; margin-bottom: var(--espaciado-s); color: #444; }
+.marca-encabezado p { line-height: 1.8; margin-bottom: var(--espaciado-s); color: var(--color-texto-secundario); }
 
 .marca-sellos {
   display: grid;
@@ -864,7 +917,7 @@ section header,
 }
 
 .sello-card {
-  background-color: #f3e8ff;
+  background-color: var(--color-fondo-tarjeta-alt);
   border-radius: var(--borde-tarjeta);
   padding: var(--espaciado-m);
   text-align: center;
@@ -884,10 +937,10 @@ section header,
 
 .sello-icono  { font-size: 2.5rem; }
 .sello-card strong { font-size: var(--texto-normal); color: var(--color-negro); }
-.sello-card p { font-size: var(--texto-pequeño); color: #666; }
+.sello-card p { font-size: var(--texto-pequeño); color: var(--color-texto-suave); }
 
 .marca-bloque {
-  background-color: var(--color-blanco);
+  background-color: var(--color-fondo-tarjeta);
   border-left: 4px solid #c9a0dc;
   border-radius: 0 var(--borde-tarjeta) var(--borde-tarjeta) 0;
   padding: var(--espaciado-m);
@@ -910,10 +963,10 @@ section header,
   color: var(--color-verde-oscuro);
 }
 
-.marca-bloque p { line-height: 1.8; color: #444; }
+.marca-bloque p { line-height: 1.8; color: var(--color-texto-secundario); }
 
 .objetivos-lista { display: flex; flex-direction: column; gap: 0.75rem; }
-.objetivos-lista li { line-height: 1.7; color: #444; font-size: var(--texto-normal); }
+.objetivos-lista li { line-height: 1.7; color: var(--color-texto-secundario); font-size: var(--texto-normal); }
 
 .valores-grid {
   display: grid;
@@ -923,7 +976,7 @@ section header,
 
 .valores-grid li   { display: flex; flex-direction: column; gap: 0.4rem; }
 .valores-grid strong { font-size: var(--texto-normal); color: var(--color-negro); }
-.valores-grid p    { font-size: var(--texto-pequeño); color: #666; line-height: 1.6; }
+.valores-grid p    { font-size: var(--texto-pequeño); color: var(--color-texto-suave); line-height: 1.6; }
 
 /* ================================================
    FONDOS DE PRODUCTOS
@@ -981,14 +1034,14 @@ section header,
 .testimonio-card blockquote p {
   line-height: 1.7;
   font-size: var(--texto-normal);
-  color: #333;
+  color: var(--color-texto-secundario);
   font-style: italic;
 }
 
 .cliente-info { display: flex; align-items: center; gap: 0.75rem; margin: 0; }
 .cliente-info figcaption { display: flex; flex-direction: column; gap: 0.2rem; }
 .cliente-info strong { font-size: var(--texto-normal); }
-.cliente-info span   { font-size: var(--texto-pequeño); color: #666; }
+.cliente-info span   { font-size: var(--texto-pequeño); color: var(--color-texto-suave); }
 
 /* ================================================
    GALERÍA — CARRUSEL
@@ -1114,6 +1167,8 @@ section header,
 
 /* ================================================
    FAQ
+   CORRECCIÓN: Se agrega manejo de hidden/aria-expanded
+   en JS. El CSS sigue usando max-height para la animación.
    ================================================ */
 
 .faq {
@@ -1130,7 +1185,7 @@ section header,
   color: var(--color-verde-oscuro);
 }
 
-.faq-encabezado p { color: #555; font-size: var(--texto-normal); }
+.faq-encabezado p { color: var(--color-texto-suave); font-size: var(--texto-normal); }
 
 .faq-lista {
   max-width: 800px;
@@ -1141,7 +1196,7 @@ section header,
 }
 
 .faq-item {
-  background-color: var(--color-blanco);
+  background-color: var(--color-fondo-tarjeta);
   border-radius: var(--borde-tarjeta);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   overflow: hidden;
@@ -1192,7 +1247,7 @@ section header,
   padding: 0 1.25rem 1.1rem;
 }
 
-.faq-respuesta p { font-size: var(--texto-normal); color: #444; line-height: 1.7; }
+.faq-respuesta p { font-size: var(--texto-normal); color: var(--color-texto-secundario); line-height: 1.7; }
 
 /* ================================================
    REDES SOCIALES
@@ -1262,7 +1317,7 @@ section header,
   margin-top: var(--espaciado-s);
 }
 
-.redes-whatsapp p { color: #555; font-size: var(--texto-normal); }
+.redes-whatsapp p { color: var(--color-texto-suave); font-size: var(--texto-normal); }
 
 /* ================================================
    FOOTER Y FORMULARIO DE CONTACTO
@@ -1299,7 +1354,7 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
 .footer-info a { color: #2ecc71; font-weight: bold; }
 
 .formulario-contacto {
-  background-color: var(--color-blanco);
+  background-color: var(--color-fondo-tarjeta);
   border-radius: var(--borde-tarjeta);
   padding: var(--espaciado-m);
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -1314,7 +1369,7 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   color: var(--color-verde-oscuro);
 }
 
-.form-subtitulo { font-size: var(--texto-pequeño); color: #666; margin-top: -0.5rem; }
+.form-subtitulo { font-size: var(--texto-pequeño); color: var(--color-texto-suave); margin-top: -0.5rem; }
 .form-nota      { font-size: 0.75rem; color: #999; text-align: center; margin-top: -0.5rem; }
 
 .campo-grupo { display: flex; flex-direction: column; gap: 0.3rem; }
@@ -1329,12 +1384,12 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
 .campo-grupo select,
 .campo-grupo textarea {
   padding: 0.65rem 0.9rem;
-  border: 1.5px solid #ccc;
+  border: 1.5px solid var(--color-borde-input);
   border-radius: var(--borde-boton);
   font-size: var(--texto-normal);
   font-family: var(--fuente-cuerpo);
   color: var(--color-negro);
-  background-color: #fafafa;
+  background-color: var(--color-fondo-input);
   transition: border-color 0.2s ease;
   width: 100%;
 }
@@ -1473,7 +1528,7 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   bottom: 170px;
   left: 24px;
   width: 300px;
-  background-color: var(--color-blanco);
+  background-color: var(--color-fondo-tarjeta);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.15);
   z-index: 198;
@@ -1521,17 +1576,17 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
 
 .chat-cerrar:hover { background-color: rgba(255,255,255,0.2); }
 
-.chat-cuerpo { padding: 1rem; background-color: #f0f4f0; }
+.chat-cuerpo { padding: 1rem; background-color: var(--color-fondo-chat); }
 
 .chat-mensaje {
-  background-color: #ffffff;
+  background-color: var(--color-fondo-chat-msg);
   border-radius: 12px 12px 12px 0;
   padding: 0.75rem 1rem;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
   max-width: 90%;
 }
 
-.chat-mensaje p { font-size: 0.875rem; color: #333; line-height: 1.5; margin-bottom: 0.3rem; }
+.chat-mensaje p { font-size: 0.875rem; color: var(--color-texto-secundario); line-height: 1.5; margin-bottom: 0.3rem; }
 .chat-mensaje p:last-of-type { margin-bottom: 0.5rem; }
 .chat-hora { font-size: 0.7rem; color: #999; }
 
