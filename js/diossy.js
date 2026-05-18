@@ -106,6 +106,16 @@ function crearCarrusel({ contenedor, pista, slides, puntos, btnPrev, btnNext, au
 
   irA(0);
 
+  // Soporte táctil — swipe en móvil
+  let touchInicioX = 0;
+  elContenedor.addEventListener('touchstart', e => {
+    touchInicioX = e.touches[0].clientX;
+  }, { passive: true });
+  elContenedor.addEventListener('touchend', e => {
+    const diff = touchInicioX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) irA(diff > 0 ? indice + 1 : indice - 1);
+  }, { passive: true });
+
   return { irA, detener: () => clearInterval(interval) };
 }
 
@@ -246,7 +256,7 @@ if (btnWaForm) {
       return;
     }
 
-    if (!email || !email.includes('@')) {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       mostrarToast('Por favor escribe un correo válido', '⚠️');
       campoEmail.focus();
       return;
@@ -265,15 +275,15 @@ if (btnWaForm) {
     const texto = `Hola Diossy Capilar! 🌿\n\nNombre: ${nombre}\nCorreo: ${email}\n${productoTexto}Mensaje: ${mensaje}`;
     const url   = `https://wa.me/573127786165?text=${encodeURIComponent(texto)}`;
 
-    mostrarToast('¡Redirigiendo a WhatsApp! 🌿');
-setTimeout(() => {
-  window.open(url, '_blank');
-  // Limpiar formulario
-  campoNombre.value   = '';
-  campoEmail.value    = '';
-  campoMensaje.value  = '';
-  if (campoProducto) campoProducto.value = '';
-}, 1000);
+    // Abrir WhatsApp de inmediato (gesto directo del usuario) para evitar bloqueo de popup en móviles
+    window.open(url, '_blank');
+    mostrarToast('¡Mensaje listo en WhatsApp! 🌿');
+
+    // Limpiar formulario
+    campoNombre.value  = '';
+    campoEmail.value   = '';
+    campoMensaje.value = '';
+    if (campoProducto) campoProducto.value = '';
   });
 }
 
@@ -340,16 +350,13 @@ document.querySelectorAll('.faq-pregunta').forEach(pregunta => {
     document.querySelectorAll('.faq-item').forEach(i => {
       i.classList.remove('abierto');
       const btn = i.querySelector('.faq-pregunta');
-      const res = i.querySelector('.faq-respuesta');
       if (btn) btn.setAttribute('aria-expanded', 'false');
-      if (res) res.hidden = true;
     });
 
     // Abrir el actual si estaba cerrado
     if (!estaAbierto) {
       item.classList.add('abierto');
       pregunta.setAttribute('aria-expanded', 'true');
-      if (respuesta) respuesta.hidden = false;
     }
   });
 });
@@ -391,4 +398,124 @@ if (chatAbrir && chatBurbuja && chatCerrar) {
     clearTimeout(timerAbrir);
     clearTimeout(timerCerrar);
   }, { once: true });
+}
+
+/* ================================================
+   MENÚ HAMBURGUESA + HEADER COMPACTO AL SCROLL
+   ================================================ */
+
+const siteHeader = document.querySelector('body > header');
+const navToggle  = document.getElementById('nav-toggle');
+
+if (siteHeader) {
+  // Hamburguesa
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      const abierto = siteHeader.classList.toggle('nav-abierto');
+      navToggle.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+    });
+
+    // Cerrar al hacer click en un enlace del nav
+    document.querySelectorAll('#nav-principal a').forEach(a => {
+      a.addEventListener('click', () => {
+        siteHeader.classList.remove('nav-abierto');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'Abrir menú');
+      });
+    });
+  }
+
+  // Header compacto al bajar
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('compacto', window.scrollY > 80);
+  }, { passive: true });
+}
+
+/* ================================================
+   ENLACE ACTIVO EN EL NAV AL HACER SCROLL
+   ================================================ */
+
+const navLinks   = document.querySelectorAll('#nav-principal a[href^="#"]');
+const secciones  = document.querySelectorAll('section[id], footer[id]');
+
+if (navLinks.length && secciones.length) {
+  const observadorNav = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => {
+          a.classList.toggle('activo', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+
+  secciones.forEach(s => observadorNav.observe(s));
+}
+
+/* ================================================
+   ANIMACIONES DE ENTRADA AL HACER SCROLL
+   ================================================ */
+
+const selectoresReveal = [
+  '.estadisticas-grid',
+  '.carrusel',
+  '.carrusel-precios',
+  '.seccion-encabezado',
+  '.marca-encabezado',
+  '.marca-bloque',
+  '.sello-card',
+  '.testimonio-card',
+  '.carrusel-galeria',
+  '.galeria-encabezado',
+  '.cta-final h2',
+  '.cta-final p',
+  '.faq-encabezado',
+  '.faq-item',
+  '.redes-grid',
+  '.redes-whatsapp',
+  '.footer-contacto'
+].join(', ');
+
+const elementosReveal = document.querySelectorAll(selectoresReveal);
+
+if (elementosReveal.length) {
+  elementosReveal.forEach(el => el.classList.add('reveal'));
+
+  const observadorReveal = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observadorReveal.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  elementosReveal.forEach(el => observadorReveal.observe(el));
+}
+
+/* ================================================
+   AVISO DE COOKIES / PRIVACIDAD
+   ================================================ */
+
+const cookieBanner        = document.getElementById('cookie-banner');
+const btnCookieAceptar    = document.getElementById('btn-cookie-aceptar');
+const btnCookieCerrar     = document.getElementById('btn-cookie-cerrar');
+
+if (cookieBanner && !localStorage.getItem('diossy-cookies')) {
+  setTimeout(() => cookieBanner.classList.add('visible'), 2500);
+
+  if (btnCookieAceptar) {
+    btnCookieAceptar.addEventListener('click', () => {
+      localStorage.setItem('diossy-cookies', 'aceptadas');
+      cookieBanner.classList.remove('visible');
+    });
+  }
+
+  if (btnCookieCerrar) {
+    btnCookieCerrar.addEventListener('click', () => {
+      cookieBanner.classList.remove('visible');
+    });
+  }
 }

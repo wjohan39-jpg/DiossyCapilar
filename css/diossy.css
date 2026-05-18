@@ -143,6 +143,37 @@ html.dark .sello-card:hover {
 }
 
 /* ================================================
+   SKIP TO CONTENT
+   ================================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background-color: var(--color-verde);
+  color: #ffffff;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--borde-boton);
+  font-size: var(--texto-normal);
+  font-weight: bold;
+  z-index: 10000;
+  transition: top 0.2s ease;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0.75rem; }
+
+/* ================================================
+   FOCUS VISIBLE — ACCESIBILIDAD
+   ================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-verde);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ================================================
    RESET Y BASE
    ================================================ */
 
@@ -155,6 +186,10 @@ html.dark .sello-card:hover {
 }
 
 html { scroll-behavior: smooth; }
+
+/* Compensa el header sticky al navegar por anclas */
+section[id],
+footer[id] { scroll-margin-top: 75px; }
 
 body {
   font-family: var(--fuente-cuerpo);
@@ -192,6 +227,40 @@ img { max-width: 100%; display: block; }
 .btn-verde:hover,
 .btn-blanco:hover,
 .btn-blanco-borde:hover { opacity: 0.85; transform: scale(1.06); }
+
+/* Botón menú hamburguesa */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1.5px solid var(--color-negro);
+  border-radius: var(--borde-boton);
+  width: 40px;
+  height: 36px;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--color-negro);
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+.nav-toggle:hover { background-color: rgba(0,0,0,0.06); }
+
+.nav-toggle-barra {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+body > header.nav-abierto .nav-toggle-barra:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+body > header.nav-abierto .nav-toggle-barra:nth-child(2) { opacity: 0; transform: scaleX(0); }
+body > header.nav-abierto .nav-toggle-barra:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+html.dark .nav-toggle { border-color: #e0e0e0; color: #e0e0e0; }
 
 /* Botón modo oscuro */
 .btn-dark {
@@ -269,9 +338,20 @@ body > header nav a {
 }
 
 body > header nav a:hover { transform: scale(1.1); color: var(--color-verde-oscuro); }
+body > header nav a.activo  { color: var(--color-verde); font-weight: bold; }
 
 body > header .btn-verde  { margin-left: auto; font-size: 0.85rem; padding: 0.5rem 1rem; }
 body > header .btn-blanco { font-size: 0.85rem; padding: 0.5rem 1rem; }
+
+/* Header compacto al hacer scroll */
+body > header {
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+body > header.compacto {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
 
 /* Headers internos de secciones — no deben heredar estilos del header principal */
 main header,
@@ -1453,7 +1533,7 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
-.fab-top.visible { opacity: 1; pointer-events: all; }
+.fab-top.visible { opacity: 1; pointer-events: auto; }
 
 /* ================================================
    TOAST — NOTIFICACIÓN
@@ -1480,7 +1560,7 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   white-space: nowrap;
 }
 
-.toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: all; }
+.toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
 .toast-icono   { font-size: 1.1rem; }
 
 /* ================================================
@@ -1539,7 +1619,7 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.chat-burbuja.visible { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+.chat-burbuja.visible { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
 
 .chat-header {
   background-color: var(--color-verde-oscuro);
@@ -1629,11 +1709,37 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
     gap: 0.5rem;
   }
 
-  body > header nav       { order: 3; width: 100%; }
-  body > header nav ul    { flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .nav-toggle { display: flex; }
+
+  body > header nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-menta-header);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    z-index: 99;
+    order: unset;
+    width: auto;
+  }
+
+  body > header.nav-abierto > nav { max-height: 400px; }
+
+  body > header nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1rem;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
   body > header .btn-verde,
   body > header .btn-blanco { font-size: 0.8rem; padding: 0.5rem 0.9rem; }
-  body > header .btn-verde  { margin-left: 0; }
+  body > header .btn-verde  { margin-left: auto; }
 
   .productos-destacados,
   .testimonios,
@@ -1709,4 +1815,92 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   body > header nav ul { gap: 0.5rem; font-size: 0.85rem; }
   .marca-sellos { grid-template-columns: 1fr; }
   .logo { font-size: 1rem; }
+}
+
+/* ================================================
+   ANIMACIONES DE ENTRADA AL HACER SCROLL
+   Solo se aplican si el usuario no prefiere movimiento reducido
+   ================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================================
+   AVISO DE COOKIES / PRIVACIDAD
+   ================================================ */
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-verde-oscuro);
+  color: #c8f0e0;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  z-index: 9996;
+  font-size: 0.875rem;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.2);
+}
+
+.cookie-banner.visible { transform: translateY(0); }
+.cookie-banner p { margin: 0; line-height: 1.5; }
+.cookie-banner a { color: var(--color-verde); font-weight: bold; }
+
+.cookie-btns {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.btn-cookie-aceptar {
+  background-color: var(--color-verde);
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--borde-boton);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: var(--fuente-cuerpo);
+  font-weight: bold;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+.btn-cookie-aceptar:hover { opacity: 0.85; }
+
+.btn-cookie-cerrar {
+  background: transparent;
+  color: #c8f0e0;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--borde-boton);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: var(--fuente-cuerpo);
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+.btn-cookie-cerrar:hover { background-color: rgba(255,255,255,0.1); }
+
+@media (max-width: 768px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    gap: 0.75rem;
+  }
 }
