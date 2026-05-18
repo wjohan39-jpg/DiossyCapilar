@@ -13,8 +13,8 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Diossy Capilar">
   <meta property="og:description" content="Cuidado capilar 100% natural">
-  <meta property="og:image" content="/multimedia/og-imagen.jpg">
-  <meta property="og:url" content="https://tudominio.com">
+  <meta property="og:image" content="/multimedia/fotoHero2.png">
+  <meta property="og:url" content="https://diossycapilar.com">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CO">
   <meta property="og:site_name" content="Diossy Capilar">
@@ -23,7 +23,19 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Diossy Capilar — Cuidado Capilar Natural">
   <meta name="twitter:description" content="Productos capilares 100% naturales con banano, zanahoria, biotina y romero. Medellín, Colombia.">
-  <meta name="twitter:image" content="/multimedia/og-imagen.jpg">
+  <meta name="twitter:image" content="/multimedia/fotoHero2.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://diossycapilar.com/">
+
+  <!-- Google Analytics — reemplaza G-XXXXXXXXXX con tu ID real -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script> -->
 
   <!-- Fuentes Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,15 +47,80 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
   <title>Diossy Capilar</title>
+
+  <!-- Schema.org — datos estructurados para Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "name": "Diossy Capilar",
+        "description": "Productos capilares 100% naturales con banano, zanahoria, biotina, cebolla y romero. Medellín, Colombia.",
+        "url": "https://diossycapilar.com",
+        "telephone": "+573127786165",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Medellín",
+          "addressRegion": "Antioquia",
+          "addressCountry": "CO"
+        },
+        "sameAs": [
+          "https://www.instagram.com/diossycapilar",
+          "https://www.facebook.com/share/1HSxqC48Gy/"
+        ],
+        "image": "https://diossycapilar.com/multimedia/fotoHero2.png"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Tengo cabello canoso, puedo usar Diossy Capilar? ¿Cuál shampoo me recomiendas?",
+            "acceptedAnswer": { "@type": "Answer", "text": "¡Claro que sí! Todos nuestros shampoos son libres de sales y parabenos. Te recomendamos el Shampoo de Biotina que fortalece sin alterar el color, o el Shampoo de Banano que hidrata sin pigmentar." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿El shampoo de zanahoria oxida o amarilla el cabello canoso?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Nuestro Shampoo de Zanahoria utiliza extracto natural, no pigmentos artificiales, por lo que no oxida ni amarilla el cabello canoso." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿La Loción de Romero altera o daña mi tintura?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. La Loción de Romero está libre de químicos agresivos, sales y parabenos. Es segura para cabello teñido." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿El shampoo de cebolla huele a cebolla?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. A pesar de contener extracto natural de cebolla, tiene una fragancia fresca y agradable. El proceso de formulación elimina el olor característico conservando todos sus beneficios." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Diossy Capilar testea sus productos en animales?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Diossy Capilar es una marca 100% libre de crueldad animal. Ninguno de nuestros productos es testeado en animales." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo me aplico la Loción de Romero?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Aplica directamente sobre el cuero cabelludo dos veces al día — mañana y noche. Realiza un masaje circular durante un minuto para activar la circulación. No requiere enjuague." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+
+  <!-- Saltar al contenido principal — accesibilidad con teclado -->
+  <a href="#inicio" class="skip-link">Saltar al contenido</a>
 
   <!-- ================================================
        LOADER
   ================================================ -->
   <div id="loader" role="status" aria-label="Cargando Diossy Capilar">
     <div class="loader-contenido">
-      <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" class="loader-logo" loading="eager" fetchpriority="high">
+      <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" class="loader-logo" loading="eager" fetchpriority="high" width="200" height="200">
       <div class="loader-spinner"></div>
       <p class="loader-texto">Cargando experiencia natural...</p>
     </div>
@@ -54,9 +131,14 @@
   ================================================ -->
   <header>
     <a href="#inicio" class="logo">
-      <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" class="logo-img" loading="eager" fetchpriority="high">
+      <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" class="logo-img" loading="eager" fetchpriority="high" width="110" height="55">
     </a>
-    <nav aria-label="Navegación principal">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-principal">
+      <span class="nav-toggle-barra" aria-hidden="true"></span>
+      <span class="nav-toggle-barra" aria-hidden="true"></span>
+      <span class="nav-toggle-barra" aria-hidden="true"></span>
+    </button>
+    <nav id="nav-principal" aria-label="Navegación principal">
       <ul>
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#marca">Marca</a></li>
@@ -148,7 +230,7 @@
           <article class="carrusel-slide banano-fondo" aria-label="Shampoo y Tratamiento de Banano">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/shampoo banano.png" alt="Botella de Shampoo de Banano Diossy Capilar" loading="lazy">
+              <img src="/multimedia/shampoo banano.png" alt="Botella de Shampoo de Banano Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
                 <div class="estrellas" aria-label="Calificación 4.8 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
@@ -180,7 +262,7 @@
           <article class="carrusel-slide zanahoria-fondo" aria-label="Shampoo y Tratamiento de Zanahoria">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/shampoo zanahoria.png" alt="Botella de Shampoo de Zanahoria Diossy Capilar" loading="lazy">
+              <img src="/multimedia/shampoo zanahoria.png" alt="Botella de Shampoo de Zanahoria Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
                 <div class="estrellas" aria-label="Calificación 4.7 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
@@ -212,7 +294,7 @@
           <article class="carrusel-slide biotina-fondo" aria-label="Shampoo y Tratamiento de Biotina">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/shampoobiotina.png" alt="Botella de Shampoo de Biotina Diossy Capilar" loading="lazy">
+              <img src="/multimedia/shampoobiotina.png" alt="Botella de Shampoo de Biotina Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
                 <div class="estrellas" aria-label="Calificación 4.9 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
@@ -244,7 +326,7 @@
           <article class="carrusel-slide cebolla-fondo" aria-label="Shampoo y Tratamiento de Cebolla">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/shampoocebolla.png" alt="Botella de Shampoo de Cebolla Diossy Capilar" loading="lazy">
+              <img src="/multimedia/shampoocebolla.png" alt="Botella de Shampoo de Cebolla Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
                 <div class="estrellas" aria-label="Calificación 4.6 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
@@ -276,7 +358,7 @@
           <article class="carrusel-slide romero-fondo" aria-label="Loción de Romero">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/locionromero.png" alt="Frasco de Loción de Romero Diossy Capilar" loading="lazy">
+              <img src="/multimedia/locionromero.png" alt="Frasco de Loción de Romero Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
                 <div class="estrellas" aria-label="Calificación 4.8 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
@@ -586,42 +668,42 @@
 
         <article class="faq-item">
           <button class="faq-pregunta" aria-expanded="false">¿Tengo cabello canoso, puedo usar Diossy Capilar? ¿Cuál shampoo me recomiendas?<span class="faq-icono" aria-hidden="true">+</span></button>
-          <div class="faq-respuesta" hidden>
+          <div class="faq-respuesta">
             <p>¡Claro que sí! Todos nuestros shampoos son libres de sales y parabenos. Te recomendamos el <strong>Shampoo de Biotina</strong> que fortalece sin alterar el color, o el <strong>Shampoo de Banano</strong> que hidrata sin pigmentar.</p>
           </div>
         </article>
 
         <article class="faq-item">
           <button class="faq-pregunta" aria-expanded="false">¿El shampoo de zanahoria oxida o amarilla el cabello canoso?<span class="faq-icono" aria-hidden="true">+</span></button>
-          <div class="faq-respuesta" hidden>
+          <div class="faq-respuesta">
             <p>No. Nuestro Shampoo de Zanahoria utiliza extracto natural, no pigmentos artificiales, por lo que no oxida ni amarilla el cabello canoso. Fortalece y revitaliza sin alterar el tono natural.</p>
           </div>
         </article>
 
         <article class="faq-item">
           <button class="faq-pregunta" aria-expanded="false">¿La Loción de Romero altera o daña mi tintura?<span class="faq-icono" aria-hidden="true">+</span></button>
-          <div class="faq-respuesta" hidden>
+          <div class="faq-respuesta">
             <p>No. La Loción de Romero está libre de químicos agresivos, sales y parabenos. Tonifica el cuero cabelludo sin interferir con tinturas ni tratamientos de color. Es segura para cabello teñido.</p>
           </div>
         </article>
 
         <article class="faq-item">
           <button class="faq-pregunta" aria-expanded="false">¿El shampoo de cebolla huele a cebolla?<span class="faq-icono" aria-hidden="true">+</span></button>
-          <div class="faq-respuesta" hidden>
+          <div class="faq-respuesta">
             <p>No. A pesar de contener extracto natural de cebolla, tiene una fragancia fresca y agradable. El proceso de formulación elimina el olor característico conservando todos sus beneficios.</p>
           </div>
         </article>
 
         <article class="faq-item">
           <button class="faq-pregunta" aria-expanded="false">¿Diossy Capilar testea sus productos en animales?<span class="faq-icono" aria-hidden="true">+</span></button>
-          <div class="faq-respuesta" hidden>
+          <div class="faq-respuesta">
             <p>No. Diossy Capilar es una marca 100% libre de crueldad animal. Ninguno de nuestros productos es testeado en animales. Creemos que la belleza no tiene por qué hacerles daño.</p>
           </div>
         </article>
 
         <article class="faq-item">
           <button class="faq-pregunta" aria-expanded="false">¿Cómo me aplico la Loción de Romero?<span class="faq-icono" aria-hidden="true">+</span></button>
-          <div class="faq-respuesta" hidden>
+          <div class="faq-respuesta">
             <p>Aplica directamente sobre el cuero cabelludo dos veces al día — mañana y noche. Realiza un masaje circular durante un minuto para activar la circulación. No requiere enjuague.</p>
           </div>
         </article>
@@ -701,11 +783,11 @@
         <p class="form-subtitulo">¿Tienes preguntas sobre nuestros productos? Escríbenos.</p>
         <div class="campo-grupo">
           <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" autocomplete="name">
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" autocomplete="off">
         </div>
         <div class="campo-grupo">
           <label for="email">Correo electrónico</label>
-          <input type="email" id="email" name="email" placeholder="tucorreo@email.com" autocomplete="email">
+          <input type="text" id="email" name="email" placeholder="tucorreo@email.com" autocomplete="off">
         </div>
         <div class="campo-grupo">
           <label for="producto">Producto de interés</label>
@@ -768,7 +850,7 @@
   </div>
 
   <!-- Chat burbuja -->
-  <div class="chat-burbuja" id="chat-burbuja" role="dialog" aria-label="Chat con Diossy Capilar" aria-modal="false">
+  <div class="chat-burbuja" id="chat-burbuja" role="dialog" aria-label="Chat con Diossy Capilar" aria-modal="true">
     <div class="chat-header">
       <div class="chat-header-info">
         <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" class="chat-logo">
@@ -795,12 +877,21 @@
   </div>
 
   <!-- Botón abrir chat -->
-  <button class="chat-abrir" id="chat-abrir" title="Chatea con nosotras" aria-label="Abrir chat de Diossy Capilar">
+  <button class="chat-abrir" id="chat-abrir" title="Chatea con nosotras" aria-label="Abrir chat de Diossy Capilar" aria-expanded="false">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#ffffff" aria-hidden="true">
       <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
     </svg>
     <span class="chat-notificacion" aria-label="1 mensaje nuevo">1</span>
   </button>
+
+  <!-- Aviso de privacidad / cookies -->
+  <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Aviso de privacidad">
+    <p>Usamos almacenamiento local para guardar tus preferencias (modo oscuro). No compartimos datos personales con terceros.</p>
+    <div class="cookie-btns">
+      <button class="btn-cookie-aceptar" id="btn-cookie-aceptar">Entendido</button>
+      <button class="btn-cookie-cerrar" id="btn-cookie-cerrar">Cerrar</button>
+    </div>
+  </div>
 
   <script src="js/diossy.js"></script>
 </body>

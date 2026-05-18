@@ -1,0 +1,12 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno (contraseñas, claves JWT)
+.env
+
+# Base de datos local
+database/diossy.db
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

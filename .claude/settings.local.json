@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"/mnt/c/Users/Wesly Johan/Desktop/DiossyCapilar Web/inicio.html\" \"/root/.claude/projects/-mnt-c-Users-Wesly-Johan-Desktop-DiossyCapilar-Web/memory/backup_inicio.html\")",
+      "Bash(cp \"/mnt/c/Users/Wesly Johan/Desktop/DiossyCapilar Web/css/diossy.css\" \"/root/.claude/projects/-mnt-c-Users-Wesly-Johan-Desktop-DiossyCapilar-Web/memory/backup_diossy.css\")",
+      "Bash(cp \"/mnt/c/Users/Wesly Johan/Desktop/DiossyCapilar Web/js/diossy.js\" \"/root/.claude/projects/-mnt-c-Users-Wesly-Johan-Desktop-DiossyCapilar-Web/memory/backup_diossy.js\")"
+    ]
+  }
+}
