@@ -29,7 +29,7 @@
   --color-fondo-chat-msg:    #ffffff;
 
   --fuente-titulo: 'Playfair Display', Georgia, serif;
-  --fuente-cuerpo: 'Nunito', Arial, sans-serif;
+  --fuente-cuerpo: 'DM Sans', Arial, sans-serif;
 
   --texto-pequeño:  0.875rem;
   --texto-normal:   1rem;
@@ -87,15 +87,16 @@ html.dark .sello-card,
 html.dark .testimonio-card,
 html.dark .formulario-contacto { background-color: var(--color-fondo-tarjeta); }
 
-/* Fondos de secciones con colores hardcodeados que no usan variables */
-html.dark .productos-destacados { background-color: #1e0a14; }
-html.dark .marca                { background-color: #1e0a14; }
-html.dark .testimonios          { background-color: #120810; }
-html.dark .cta-final            { background-color: #1e0a14; }
-html.dark .faq                  { background-color: #120810; }
-html.dark .redes-sociales       { background-color: #120810; }
-html.dark .precios              { background-color: #120810; }
-html.dark .precios-puntos       { background-color: #120810; }
+/* Fondos de secciones — se usa 'background' (shorthand) para cancelar
+   también el background-image gradient definido en modo claro */
+html.dark .productos-destacados { background: #1e0a14; }
+html.dark .marca                { background: #1e0a14; }
+html.dark .testimonios          { background: #120810; }
+html.dark .cta-final            { background: #1e0a14; }
+html.dark .faq                  { background: #120810; }
+html.dark .redes-sociales       { background: #120810; }
+html.dark .precios              { background: #120810; }
+html.dark .precios-puntos       { background: #120810; }
 html.dark .precio-slide         { background-color: #1e0a14; }
 html.dark .precio-valores       { background-color: #2c1020; }
 html.dark footer                { background-color: #120810; }
@@ -109,6 +110,13 @@ html.dark .marca-encabezado h2      { color: #f0d8e0; }
 html.dark .seccion-encabezado p,
 html.dark .galeria-encabezado p,
 html.dark .marca-encabezado p       { color: #d8c0c8; }
+/* Rutina y Cómo funciona — encabezados */
+html.dark .rutina-header h2,
+html.dark .como-funciona-header h2  { color: #f0d8e0; }
+html.dark .rutina-header p,
+html.dark .como-funciona-header p   { color: #d8c0c8; }
+/* Subtítulos de línea en modo oscuro en TODAS las secciones */
+html.dark .subtitulo-linea          { color: #c9a84c; }
 html.dark .testimonio-card blockquote p { color: #f0d8e0; }
 html.dark .precio-kit-destacado     { background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(212,105,138,0.06)); border-color: rgba(201,168,76,0.3); }
 html.dark .precio-kit               { color: #d8c0c8; }
@@ -131,6 +139,36 @@ html.dark .faq-item   { background-color: #1e0a14; }
 html.dark .faq-pregunta { color: #c9a84c; }
 html.dark .faq-pregunta:hover { background-color: #2c1020; }
 html.dark .chat-burbuja { background-color: var(--color-fondo-tarjeta); }
+
+/* Rutina Capilar — dark mode */
+html.dark .rutina-seccion          { background: linear-gradient(160deg, #1e0a14 0%, #2c1020 100%); }
+html.dark .rutina-header h2        { color: #f0d8e0; }
+html.dark .rutina-header p         { color: #d8c0c8; }
+html.dark .rutina-card             { background-color: #1e0a14; box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+html.dark .rutina-card-titulo      { color: #f0d8e0; }
+html.dark .rutina-item strong      { color: #f0d8e0; }
+html.dark .rutina-item p           { color: #d8c0c8; }
+html.dark .rutina-tip              { background: #2c1020; color: #b09098; }
+html.dark .rutina-card-badge       { background: #2c1020; }
+html.dark .rutina-badge-diaria     { background: rgba(201,168,76,0.08); }
+html.dark .rutina-tl-dot           { border-color: #150810; }
+html.dark .rutina-tl-item strong   { color: #c9a84c; }
+html.dark .rutina-tl-item p        { color: #d8c0c8; }
+
+/* Quiz — dark mode */
+html.dark .quiz-wrapper              { background-color: #1e0a14; box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
+html.dark .quiz-inicio-logo          { background: linear-gradient(135deg, #2c1020, #3d1530); border-color: rgba(201,168,76,0.4); box-shadow: 0 6px 24px rgba(0,0,0,0.4), 0 0 0 6px rgba(201,168,76,0.06); }
+html.dark .quiz-logo-img             { filter: brightness(0) invert(1); }
+html.dark .quiz-pregunta-texto       { color: #f0d8e0; }
+html.dark .quiz-opcion               { background: #1e0a14; border-color: #4a2035; color: #f0d8e0; }
+html.dark .quiz-opcion:hover         { background: #2c1020; border-color: #d4698a; }
+html.dark .quiz-opcion:active        { background: #3d1030; }
+html.dark .quiz-resultado-producto   { background: #2c1020; }
+html.dark .quiz-res-nombre           { color: #f0d8e0; }
+html.dark .quiz-res-desc             { color: #d8c0c8; }
+html.dark .quiz-progreso-barra       { background: #4a2035; }
+html.dark .quiz-badge-tiempo         { color: #c9a84c; border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.08); }
+html.dark .quiz-res-comprar          { color: #2c0f1e; }
 
 /* Cómo funciona — dark mode */
 html.dark .como-funciona              { background: linear-gradient(160deg, #1e0a14 0%, #2c1020 60%, #150810 100%); }
@@ -499,6 +537,53 @@ section header,
 
 @keyframes girar { to { transform: rotate(360deg); } }
 
+/* ---- Contenedores de partículas: contenido sobre ellas ---- */
+
+/* Quiz: header y tarjeta blanca sobre las partículas */
+.quiz-seccion { position: relative; overflow: hidden; }
+.quiz-seccion-header,
+.quiz-wrapper  { position: relative; z-index: 1; }
+
+/* CTA Final */
+.cta-final { position: relative; overflow: hidden; }
+.cta-final h2,
+.cta-final p,
+.cta-final > a { position: relative; z-index: 1; }
+
+/* Kit Rutina */
+.rutina-kit { position: relative; overflow: hidden; }
+.rutina-kit-imagenes,
+.rutina-kit-info { position: relative; z-index: 1; }
+
+/* ---- Partículas de la sección de estadísticas ---- */
+.estadistica-particula {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+}
+
+@keyframes particula-izq {
+  0%   { transform: translateY(0)     translateX(0)     scale(1);    opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 0.55; }
+  100% { transform: translateY(-130px) translateX(-28px) scale(0.12); opacity: 0; }
+}
+@keyframes particula-rec {
+  0%   { transform: translateY(0)     translateX(0)    scale(1);    opacity: 0; }
+  12%  { opacity: 0.85; }
+  88%  { opacity: 0.5; }
+  100% { transform: translateY(-130px) translateX(6px)  scale(0.12); opacity: 0; }
+}
+@keyframes particula-der {
+  0%   { transform: translateY(0)     translateX(0)    scale(1);    opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 0.55; }
+  100% { transform: translateY(-130px) translateX(28px) scale(0.12); opacity: 0; }
+}
+
 /* ================================================
    HERO
    CORRECCIÓN: background-attachment: fixed no funciona
@@ -518,6 +603,43 @@ section header,
   color: var(--color-blanco);
   position: relative;
   overflow: hidden;
+}
+
+/* ================================================
+   BADGE GIRATORIO — Hero
+   ================================================ */
+
+/* Especificidad mayor que .hero > * { position: relative } */
+.hero > .badge-hero {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 150px;
+  height: 150px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.badge-svg {
+  width: 100%;
+  height: 100%;
+  animation: girar 18s linear infinite;
+  display: block;
+}
+
+.badge-centro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  line-height: 1;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-svg { animation: none; }
 }
 
 /* Fondo con parallax usando pseudo-elemento (compatible con iOS) */
@@ -603,9 +725,14 @@ section header,
 .estadisticas {
   background: linear-gradient(135deg, #d4698a 0%, #c9405a 50%, #8b1a4a 100%);
   padding: 0.5rem var(--espaciado-l);
+  position: relative;
+  overflow: hidden;
 }
 
+/* El grid queda sobre las partículas */
 .estadisticas-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--espaciado-m);
@@ -1069,6 +1196,485 @@ section header,
 }
 
 .punto-precio.activo { background-color: var(--color-verde); transform: scale(1.3); }
+
+/* ================================================
+   QUIZ — ¿Cuál es tu shampoo ideal?
+   ================================================ */
+
+.quiz-seccion {
+  padding: var(--espaciado-l) var(--espaciado-l);
+  background: linear-gradient(135deg, #2c0f1e 0%, #8b1a4a 55%, #c9405a 100%);
+}
+
+.quiz-seccion-header {
+  text-align: center;
+  margin-bottom: var(--espaciado-m);
+}
+
+.quiz-seccion-header h2 {
+  font-family: var(--fuente-titulo);
+  font-size: var(--texto-grande);
+  color: #ffffff;
+  margin: 0.3rem 0 var(--espaciado-s);
+  line-height: 1.2;
+}
+
+.quiz-seccion-header p { color: rgba(255,255,255,0.82); line-height: 1.7; }
+
+/* Tarjeta blanca central */
+.quiz-wrapper {
+  max-width: 660px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: var(--espaciado-l) var(--espaciado-m);
+  box-shadow: 0 24px 64px rgba(44, 15, 30, 0.35);
+  text-align: center;
+}
+
+/* --- Inicio --- */
+.quiz-inicio-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fce4ef 0%, #f5c8df 100%);
+  border: 3px solid rgba(201, 168, 76, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+  box-shadow:
+    0 6px 24px rgba(212, 105, 138, 0.25),
+    0 0 0 6px rgba(201, 168, 76, 0.08);
+}
+
+.quiz-logo-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  display: block;
+}
+
+.quiz-badge-tiempo {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(212,105,138,0.1));
+  border: 1px solid rgba(201,168,76,0.45);
+  color: #a07828;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: var(--espaciado-m);
+}
+
+.quiz-btn-start {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(135deg, #e8688a, #c9405a);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--borde-boton);
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--fuente-cuerpo);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 20px rgba(201, 64, 90, 0.4);
+}
+
+.quiz-btn-start:hover { transform: scale(1.04); box-shadow: 0 10px 28px rgba(201, 64, 90, 0.5); }
+
+/* --- Barra de progreso --- */
+.quiz-progreso-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: var(--espaciado-m);
+}
+
+.quiz-progreso-barra {
+  flex: 1;
+  height: 8px;
+  background: #f0e0e8;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.quiz-progreso-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e8688a, #c9a84c);
+  border-radius: 999px;
+  transition: width 0.45s ease;
+}
+
+.quiz-progreso-label {
+  font-size: 0.82rem;
+  color: var(--color-texto-suave);
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* --- Pregunta --- */
+.quiz-icono-pregunta { font-size: 2.5rem; margin-bottom: 0.4rem; }
+
+.quiz-pregunta-texto {
+  font-family: var(--fuente-titulo);
+  font-size: 1.45rem;
+  color: var(--color-negro);
+  margin-bottom: var(--espaciado-m);
+  line-height: 1.3;
+  transition: opacity 0.2s ease;
+}
+
+.quiz-opciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.quiz-opcion {
+  background: #ffffff;
+  border: 2px solid #f0d0dc;
+  border-radius: 12px;
+  padding: 1rem 0.9rem;
+  font-size: 0.9rem;
+  font-family: var(--fuente-cuerpo);
+  color: var(--color-negro);
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.4;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.quiz-opcion:hover  { border-color: var(--color-uva); background: #fce4ef; transform: scale(1.02); }
+.quiz-opcion:active { transform: scale(0.97); background: #f5c8df; }
+
+/* --- Resultado --- */
+.quiz-resultado-header { margin-bottom: var(--espaciado-m); }
+
+.quiz-resultado-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-resultado-header h3 {
+  font-family: var(--fuente-titulo);
+  font-size: 1.8rem;
+  color: var(--color-uva);
+  margin-bottom: 0.3rem;
+}
+
+.quiz-resultado-header p { color: var(--color-texto-suave); font-size: 0.9rem; }
+
+.quiz-resultado-producto {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-m);
+  background: var(--color-gris-claro);
+  border-radius: 16px;
+  padding: var(--espaciado-s) var(--espaciado-m);
+  margin-bottom: var(--espaciado-m);
+  text-align: left;
+}
+
+.quiz-res-imagen-wrap {
+  width: 110px;
+  height: 130px;
+  border-radius: 12px;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quiz-res-imagen { width: 88px; height: 110px; object-fit: contain; }
+
+.quiz-res-info { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+
+.quiz-res-nombre {
+  font-family: var(--fuente-titulo);
+  font-size: 1.05rem;
+  color: var(--color-negro);
+  margin: 0;
+}
+
+.quiz-res-desc {
+  font-size: 0.82rem;
+  color: var(--color-texto-secundario);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.quiz-res-precio { font-size: 0.88rem; font-weight: 700; color: #c9a84c; }
+
+.quiz-res-comprar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  width: fit-content;
+  color: #2c0f1e;
+}
+
+.quiz-btn-reiniciar {
+  background: none;
+  border: none;
+  color: var(--color-uva);
+  font-size: 0.9rem;
+  font-family: var(--fuente-cuerpo);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0.4rem;
+  transition: opacity 0.2s ease;
+}
+
+.quiz-btn-reiniciar:hover { opacity: 0.65; }
+
+/* ================================================
+   SECCIÓN RUTINA CAPILAR
+   ================================================ */
+
+.rutina-seccion {
+  padding: var(--espaciado-l) var(--espaciado-l);
+  background: linear-gradient(160deg, #fff8f9 0%, #fce4ef 100%);
+}
+
+.rutina-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--espaciado-l);
+}
+
+.rutina-header h2 {
+  font-family: var(--fuente-titulo);
+  font-size: var(--texto-grande);
+  color: var(--color-negro);
+  margin: 0.3rem 0 var(--espaciado-s);
+  line-height: 1.2;
+}
+
+.rutina-header p { color: var(--color-texto-secundario); line-height: 1.7; }
+
+/* Grid de tarjetas */
+.rutina-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaciado-m);
+  max-width: 860px;
+  margin: 0 auto var(--espaciado-l);
+}
+
+.rutina-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: var(--espaciado-m);
+  box-shadow: 0 4px 24px rgba(212, 105, 138, 0.1);
+  border-top: 4px solid var(--color-uva);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-s);
+}
+
+.rutina-card-diaria { border-top-color: var(--color-verde); }
+
+.rutina-card-badge {
+  display: inline-block;
+  background: #fce4ef;
+  color: var(--color-uva);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+
+.rutina-badge-diaria {
+  background: rgba(201, 168, 76, 0.13);
+  color: #a07828;
+}
+
+.rutina-card-titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.3rem;
+  color: var(--color-negro);
+  margin: 0;
+}
+
+.rutina-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.rutina-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.rutina-num {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e8688a, #c9405a);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(201, 64, 90, 0.3);
+}
+
+.rutina-num-gold {
+  background: linear-gradient(135deg, #c9a84c, #a07828);
+  box-shadow: 0 3px 10px rgba(160, 120, 40, 0.3);
+  font-size: 1rem;
+}
+
+.rutina-item div { display: flex; flex-direction: column; gap: 0.2rem; }
+.rutina-item strong { font-size: 0.92rem; color: var(--color-negro); line-height: 1.3; }
+.rutina-item p  { font-size: 0.82rem; color: var(--color-texto-secundario); line-height: 1.55; margin: 0; }
+
+.rutina-tip {
+  font-size: 0.78rem;
+  color: var(--color-texto-suave);
+  background: var(--color-gris-claro);
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Timeline de resultados */
+.rutina-timeline {
+  display: flex;
+  align-items: flex-start;
+  max-width: 860px;
+  margin: 0 auto var(--espaciado-l);
+}
+
+.rutina-tl-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--espaciado-s);
+  gap: 0.45rem;
+}
+
+.rutina-tl-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-uva);
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 2px var(--color-uva);
+  flex-shrink: 0;
+  margin-bottom: 0.4rem;
+}
+
+.rutina-tl-dot-gold {
+  background: var(--color-verde);
+  box-shadow: 0 0 0 2px var(--color-verde);
+}
+
+.rutina-tl-linea {
+  flex-shrink: 0;
+  height: 2px;
+  width: 80px;
+  background: linear-gradient(90deg, var(--color-uva), var(--color-verde));
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+.rutina-tl-item strong {
+  font-size: 0.88rem;
+  color: var(--color-uva);
+  font-weight: 700;
+}
+
+.rutina-tl-item p {
+  font-size: 0.8rem;
+  color: var(--color-texto-secundario);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Kit Completo CTA */
+.rutina-kit {
+  max-width: 820px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #2c0f1e 0%, #8b1a4a 60%, #c9405a 100%);
+  border-radius: 20px;
+  padding: var(--espaciado-m) var(--espaciado-l);
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-l);
+  box-shadow: 0 10px 36px rgba(44, 15, 30, 0.32);
+}
+
+.rutina-kit-imagenes {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.rutina-kit-img {
+  width: 68px;
+  height: 88px;
+  object-fit: contain;
+  filter: saturate(1.3) brightness(1.08);
+  drop-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.rutina-kit-plus {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+}
+
+.rutina-kit-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.rutina-kit-titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.55rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.rutina-kit-desc {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.rutina-kit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
+  color: #2c0f1e;
+}
 
 /* ================================================
    SECCIÓN CÓMO FUNCIONA
@@ -1963,6 +2569,10 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
    RESPONSIVE — TABLETS (max 1024px)
    ================================================ */
 
+@media (max-width: 1100px) {
+  .hero > .badge-hero { display: none; }
+}
+
 @media (max-width: 1024px) {
   .marca-sellos       { grid-template-columns: repeat(2, 1fr); }
   .valores-grid       { grid-template-columns: repeat(2, 1fr); }
@@ -2015,6 +2625,8 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   body > header .btn-blanco { font-size: 0.8rem; padding: 0.5rem 0.9rem; }
   body > header .btn-verde  { margin-left: auto; }
 
+  .hero > .badge-hero { display: none; }
+
   .productos-destacados,
   .testimonios,
   .galeria,
@@ -2045,6 +2657,22 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   .precio-kit strong { font-size: 1.5rem; }
 
   .precios { padding: var(--espaciado-m) var(--espaciado-s); }
+
+  .rutina-seccion       { padding: var(--espaciado-m) var(--espaciado-s); }
+  .rutina-grid          { grid-template-columns: 1fr; }
+  .rutina-timeline      { flex-direction: column; align-items: center; gap: 0; }
+  .rutina-tl-linea      { width: 2px; height: 32px; background: linear-gradient(180deg, var(--color-uva), var(--color-verde)); margin-top: 0; }
+  .rutina-kit           { flex-direction: column; text-align: center; padding: var(--espaciado-m); gap: var(--espaciado-s); }
+  .rutina-kit-btn       { width: 100%; justify-content: center; }
+  .rutina-kit-imagenes  { justify-content: center; }
+
+  .quiz-seccion         { padding: var(--espaciado-m) var(--espaciado-s); }
+  .quiz-wrapper         { padding: var(--espaciado-m) var(--espaciado-s); border-radius: 16px; }
+  .quiz-seccion-header h2 { font-size: 1.8rem; }
+  .quiz-opciones        { grid-template-columns: 1fr; }
+  .quiz-resultado-produto { flex-direction: column; align-items: center; text-align: center; }
+  .quiz-resultado-producto { flex-direction: column; align-items: center; text-align: center; }
+  .quiz-res-comprar     { width: 100%; justify-content: center; }
 
   .como-funciona      { padding: var(--espaciado-m) var(--espaciado-s); }
   .pasos-grid         { grid-template-columns: 1fr 1fr; gap: var(--espaciado-m) var(--espaciado-s); }
@@ -2097,6 +2725,47 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   .marca-sellos { grid-template-columns: 1fr; }
   .logo { font-size: 1rem; }
   .pasos-grid { grid-template-columns: 1fr; }
+}
+
+/* ================================================
+   SEPARADORES DE ONDA ENTRE SECCIONES
+   ================================================ */
+
+.ola {
+  display: block;
+  overflow: hidden;
+  line-height: 0;
+  margin: -2px 0; /* elimina micro-gaps entre secciones */
+}
+
+.ola svg {
+  display: block;
+  width: 100%;
+  height: 70px;
+}
+
+/* ================================================
+   TILT 3D — preparación y capa de luz
+   ================================================ */
+
+.sello-card,
+.testimonio-card,
+.paso-item,
+.rutina-card {
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Capa de reflexión de luz */
+.tilt-luz {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 /* ================================================

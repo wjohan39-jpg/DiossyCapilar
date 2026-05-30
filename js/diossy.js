@@ -188,6 +188,69 @@ crearCarrusel({
 });
 
 /* ================================================
+   PARTÍCULAS FLOTANTES — Sistema reutilizable
+   Activo en: estadísticas, quiz, CTA y kit rutina
+   ================================================ */
+
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const COLORES = [
+    'rgba(255,255,255,0.82)',
+    '#f5e199',
+    'rgba(255,208,224,0.9)',
+    'rgba(201,168,76,0.88)',
+    'rgba(255,255,255,0.5)',
+    '#fce4ef'
+  ];
+  const ANIMS = ['particula-izq', 'particula-rec', 'particula-der'];
+
+  function lanzar(contenedor) {
+    const p   = document.createElement('span');
+    const tam = Math.random() * 5 + 2;
+    const dur = Math.random() * 2800 + 2200;
+    const col = COLORES[Math.floor(Math.random() * COLORES.length)];
+    const ani = ANIMS[Math.floor(Math.random() * ANIMS.length)];
+
+    p.className = 'estadistica-particula';
+    p.style.cssText = `
+      left:${Math.random() * 96 + 2}%;
+      width:${tam}px;
+      height:${tam}px;
+      background:${col};
+      box-shadow:0 0 ${tam * 2}px ${col};
+      animation:${ani} ${dur}ms ease-in forwards;
+    `;
+
+    contenedor.appendChild(p);
+    p.addEventListener('animationend', () => {
+      p.remove();
+      lanzar(contenedor);
+    }, { once: true });
+  }
+
+  function iniciarParticulas(selector, cantidad, umbral) {
+    const el = document.querySelector(selector);
+    if (!el) return;
+
+    const obs = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      obs.disconnect();
+      for (let i = 0; i < cantidad; i++) {
+        setTimeout(() => lanzar(el), Math.random() * 2200);
+      }
+    }, { threshold: umbral });
+
+    obs.observe(el);
+  }
+
+  iniciarParticulas('.estadisticas', 22, 0.4);
+  iniciarParticulas('.quiz-seccion',  20, 0.3);
+  iniciarParticulas('.cta-final',     25, 0.3);
+  iniciarParticulas('.rutina-kit',    14, 0.5);
+})();
+
+/* ================================================
    CONTADOR DE ESTADÍSTICAS
    CORRECCIÓN: La constante de velocidad ahora tiene
    nombre descriptivo en vez de un número mágico.
@@ -515,6 +578,224 @@ if (elementosReveal.length) {
 
   elementosReveal.forEach(el => observadorReveal.observe(el));
 }
+
+/* ================================================
+   QUIZ — ¿Cuál es tu shampoo ideal?
+   ================================================ */
+
+(function () {
+  const elInicio    = document.getElementById('quiz-inicio');
+  const elPreguntas = document.getElementById('quiz-preguntas');
+  const elResultado = document.getElementById('quiz-resultado');
+  const btnStart    = document.getElementById('quiz-btn-start');
+  const btnRein     = document.getElementById('quiz-btn-reiniciar');
+  if (!elInicio) return;
+
+  const preguntas = [
+    {
+      icono: '✨',
+      texto: '¿Cómo es tu cabello?',
+      opciones: [
+        { texto: '😞 Seco o muy dañado',                    pts: { banano:3, zanahoria:1, biotina:0, cebolla:0, romero:0 } },
+        { texto: '💧 Graso, se ensucia rápido',             pts: { banano:0, zanahoria:0, biotina:0, cebolla:3, romero:1 } },
+        { texto: '🪶 Fino y sin volumen',                    pts: { banano:0, zanahoria:0, biotina:3, cebolla:0, romero:1 } },
+        { texto: '🌀 Mixto (raíces grasas, puntas secas)',   pts: { banano:1, zanahoria:2, biotina:0, cebolla:1, romero:0 } }
+      ]
+    },
+    {
+      icono: '🔍',
+      texto: '¿Cuál es tu mayor problema capilar?',
+      opciones: [
+        { texto: '🌫️ Frizz y falta de brillo',              pts: { banano:1, zanahoria:3, biotina:0, cebolla:0, romero:0 } },
+        { texto: '🌱 Caída y poco crecimiento',              pts: { banano:0, zanahoria:0, biotina:2, cebolla:0, romero:3 } },
+        { texto: '🧴 Cuero cabelludo graso',                 pts: { banano:0, zanahoria:0, biotina:0, cebolla:3, romero:0 } },
+        { texto: '✂️ Puntas secas o quebradizas',            pts: { banano:3, zanahoria:1, biotina:0, cebolla:0, romero:0 } }
+      ]
+    },
+    {
+      icono: '🌟',
+      texto: '¿Qué resultado quieres lograr?',
+      opciones: [
+        { texto: '💦 Hidratación profunda y suavidad',       pts: { banano:3, zanahoria:1, biotina:0, cebolla:0, romero:0 } },
+        { texto: '🚀 Estimular el crecimiento',              pts: { banano:0, zanahoria:0, biotina:2, cebolla:0, romero:3 } },
+        { texto: '🧹 Limpieza y control de grasa',           pts: { banano:0, zanahoria:0, biotina:0, cebolla:3, romero:1 } },
+        { texto: '✨ Brillo y recuperación',                  pts: { banano:1, zanahoria:3, biotina:1, cebolla:0, romero:0 } }
+      ]
+    }
+  ];
+
+  const resultados = {
+    banano: {
+      nombre: 'Shampoo y Tratamiento de Banano',
+      desc:   'Tu cabello necesita hidratación intensiva. El Banano nutre profundamente, devuelve la suavidad y restaura el brillo natural desde la primera aplicación.',
+      img:    '/multimedia/shampoo banano.png',
+      precio: 'Kit desde $65.000',
+      color:  '#f4a261',
+      wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20el%20Shampoo%20de%20Banano%20%F0%9F%8D%8C%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
+    },
+    zanahoria: {
+      nombre: 'Shampoo y Tratamiento de Zanahoria',
+      desc:   'Tu cabello pide brillo y suavidad. La Zanahoria realiza un relleno molecular que devuelve el esplendor y la textura sedosa que tu cabello merece.',
+      img:    '/multimedia/shampoo zanahoria.png',
+      precio: 'Kit desde $60.000',
+      color:  '#e8a030',
+      wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20el%20Shampoo%20de%20Zanahoria%20%F0%9F%A5%95%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
+    },
+    biotina: {
+      nombre: 'Shampoo y Tratamiento de Biotina',
+      desc:   'Tu cabello necesita fortaleza y volumen. La Biotina estimula el crecimiento, engrosa cada hebra y le devuelve la vitalidad que merece.',
+      img:    '/multimedia/shampoobiotina.png',
+      precio: 'Kit desde $60.000',
+      color:  '#27ae60',
+      wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20el%20Shampoo%20de%20Biotina%20%F0%9F%92%9A%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
+    },
+    cebolla: {
+      nombre: 'Shampoo y Tratamiento de Cebolla',
+      desc:   'Tu cuero cabelludo necesita pureza. La Cebolla regula la grasa, limpia profundo y fortalece el cabello con sus propiedades purificantes y antioxidantes.',
+      img:    '/multimedia/shampoocebolla.png',
+      precio: 'Kit desde $60.000',
+      color:  '#8e44ad',
+      wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20el%20Shampoo%20de%20Cebolla%20%F0%9F%A7%85%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
+    },
+    romero: {
+      nombre: 'Loción de Romero',
+      desc:   'Tu cabello necesita un activador de crecimiento. La Loción de Romero estimula la circulación capilar y reactiva los folículos para un crecimiento visible.',
+      img:    '/multimedia/locionromero.png',
+      precio: 'Desde $25.000',
+      color:  '#c9a84c',
+      wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20la%20Loci%C3%B3n%20de%20Romero%20%F0%9F%8C%BF%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
+    }
+  };
+
+  let preguntaActual = 0;
+  let pts = { banano:0, zanahoria:0, biotina:0, cebolla:0, romero:0 };
+
+  function renderPregunta(i) {
+    const p   = preguntas[i];
+    const pct = Math.round(((i + 1) / preguntas.length) * 100);
+
+    document.getElementById('quiz-progreso-fill').style.width     = pct + '%';
+    document.getElementById('quiz-progreso-label').textContent    = `Pregunta ${i + 1} de ${preguntas.length}`;
+    document.getElementById('quiz-icono-pregunta').textContent    = p.icono;
+    document.getElementById('quiz-pregunta-texto').textContent    = p.texto;
+
+    const contenedor = document.getElementById('quiz-opciones');
+    contenedor.innerHTML = '';
+    p.opciones.forEach(op => {
+      const btn = document.createElement('button');
+      btn.className   = 'quiz-opcion';
+      btn.textContent = op.texto;
+      btn.setAttribute('role', 'listitem');
+      btn.addEventListener('click', () => elegir(op.pts));
+      contenedor.appendChild(btn);
+    });
+  }
+
+  function elegir(puntos) {
+    Object.keys(puntos).forEach(k => { pts[k] += puntos[k]; });
+    preguntaActual++;
+
+    if (preguntaActual < preguntas.length) {
+      const txt = document.getElementById('quiz-pregunta-texto');
+      txt.style.opacity = '0';
+      setTimeout(() => { renderPregunta(preguntaActual); txt.style.opacity = '1'; }, 220);
+    } else {
+      mostrarResultado();
+    }
+  }
+
+  function mostrarResultado() {
+    const ganador = Object.keys(pts).reduce((a, b) => pts[a] >= pts[b] ? a : b);
+    const r = resultados[ganador];
+
+    elPreguntas.hidden = true;
+    elResultado.hidden = false;
+
+    const waIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>`;
+
+    document.getElementById('quiz-resultado-producto').innerHTML = `
+      <div class="quiz-res-imagen-wrap" style="border-color:${r.color}40; background:${r.color}12;">
+        <img src="${r.img}" alt="${r.nombre}" class="quiz-res-imagen" loading="lazy">
+      </div>
+      <div class="quiz-res-info">
+        <h4 class="quiz-res-nombre">${r.nombre}</h4>
+        <p class="quiz-res-desc">${r.desc}</p>
+        <span class="quiz-res-precio">${r.precio}</span>
+        <a href="${r.wa}" target="_blank" rel="noopener noreferrer" class="btn-verde quiz-res-comprar">
+          ${waIcon} Comprar por WhatsApp
+        </a>
+      </div>
+    `;
+  }
+
+  function reiniciar() {
+    preguntaActual = 0;
+    pts = { banano:0, zanahoria:0, biotina:0, cebolla:0, romero:0 };
+    elResultado.hidden = true;
+    elInicio.hidden    = false;
+  }
+
+  btnStart.addEventListener('click', () => {
+    elInicio.hidden    = true;
+    elPreguntas.hidden = false;
+    renderPregunta(0);
+  });
+
+  if (btnRein) btnRein.addEventListener('click', reiniciar);
+})();
+
+/* ================================================
+   TILT 3D — Cards de producto al hacer hover
+   ================================================ */
+
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(pointer: fine)').matches) return; // solo mouse
+
+  const GRADOS = 8;   // inclinación máxima en grados
+  const ESCALA = 1.04; // escala al hacer hover
+
+  const tarjetas = document.querySelectorAll(
+    '.sello-card, .testimonio-card, .paso-item, .rutina-card'
+  );
+
+  tarjetas.forEach(card => {
+    // Capa de luz que sigue el mouse (efecto reflexión)
+    const luz = document.createElement('div');
+    luz.className = 'tilt-luz';
+    luz.setAttribute('aria-hidden', 'true');
+    card.appendChild(luz);
+
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x    = e.clientX - rect.left;
+      const y    = e.clientY - rect.top;
+      const cx   = rect.width  / 2;
+      const cy   = rect.height / 2;
+
+      const rotX = ((y - cy) / cy) * -GRADOS;
+      const rotY = ((x - cx) / cx) *  GRADOS;
+
+      card.style.transition = 'transform 0.08s linear';
+      card.style.transform  =
+        `perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(${ESCALA})`;
+
+      // Luz que sigue el puntero dentro de la card
+      const lx = (x / rect.width)  * 100;
+      const ly = (y / rect.height) * 100;
+      luz.style.opacity    = '1';
+      luz.style.background =
+        `radial-gradient(circle at ${lx}% ${ly}%, rgba(255,255,255,0.2) 0%, transparent 65%)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.45s ease';
+      card.style.transform  =
+        'perspective(700px) rotateX(0deg) rotateY(0deg) scale(1)';
+      luz.style.opacity = '0';
+    });
+  });
+})();
 
 /* ================================================
    AVISO DE COOKIES / PRIVACIDAD
