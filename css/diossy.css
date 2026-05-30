@@ -647,7 +647,7 @@ section header,
   content: '';
   position: absolute;
   inset: -20%;
-  background-image: url('/multimedia/fotoHero2.png');
+  background-image: url('/multimedia/fotoHerot.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
