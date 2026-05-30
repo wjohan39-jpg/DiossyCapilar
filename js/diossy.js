@@ -229,57 +229,76 @@ if (seccionEstadisticas && numeros.length) {
 }
 
 /* ================================================
-   FORMULARIO — ENVÍO POR WHATSAPP
-   CORRECCIÓN: Validación manual (sin HTML5 required)
-   para ser consistente con type="button".
+   FORMULARIO — ENVÍO POR WHATSAPP + GUARDADO EN API
    ================================================ */
+
+// Cambia esta URL cuando el backend esté en producción
+const API_URL = 'http://localhost:8080/api/contactos';
 
 const btnWaForm = document.getElementById('btn-whatsapp-form');
 
 if (btnWaForm) {
   btnWaForm.addEventListener('click', () => {
-    const campoNombre  = document.getElementById('nombre');
-    const campoEmail   = document.getElementById('email');
+    const campoNombre   = document.getElementById('nombre');
+    const campoEmail    = document.getElementById('email');
     const campoProducto = document.getElementById('producto');
-    const campoMensaje = document.getElementById('mensaje');
+    const campoMensaje  = document.getElementById('mensaje');
 
     if (!campoNombre || !campoEmail || !campoMensaje) return;
 
-    const nombre  = campoNombre.value.trim();
-    const email   = campoEmail.value.trim();
-    const mensaje = campoMensaje.value.trim();
+    const nombre   = campoNombre.value.trim();
+    const email    = campoEmail.value.trim();
+    const mensaje  = campoMensaje.value.trim();
+    const producto = campoProducto ? campoProducto.value : '';
 
-    // Validación manual
+    // Validación
     if (!nombre) {
       mostrarToast('Por favor escribe tu nombre', '⚠️');
       campoNombre.focus();
       return;
     }
-
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       mostrarToast('Por favor escribe un correo válido', '⚠️');
       campoEmail.focus();
       return;
     }
-
     if (!mensaje) {
       mostrarToast('Por favor escribe tu mensaje', '⚠️');
       campoMensaje.focus();
       return;
     }
 
+    // 1. Abrir WhatsApp de inmediato (gesto directo → no se bloquea en móvil)
     const productoTexto = campoProducto && campoProducto.value
       ? `Producto de interés: ${campoProducto.selectedOptions[0].text}\n`
       : '';
+    const textoWa = `Hola Diossy Capilar! 🌿\n\nNombre: ${nombre}\nCorreo: ${email}\n${productoTexto}Mensaje: ${mensaje}`;
+    window.open(`https://wa.me/573127786165?text=${encodeURIComponent(textoWa)}`, '_blank');
 
-    const texto = `Hola Diossy Capilar! 🌿\n\nNombre: ${nombre}\nCorreo: ${email}\n${productoTexto}Mensaje: ${mensaje}`;
-    const url   = `https://wa.me/573127786165?text=${encodeURIComponent(texto)}`;
+    // 2. Guardar en la base de datos via API (en paralelo)
+    fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre,
+        email,
+        productoInteres: producto || null,
+        mensaje
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        mostrarToast('¡Mensaje guardado y enviado por WhatsApp! 🌿');
+      } else {
+        mostrarToast('Mensaje enviado por WhatsApp ✅');
+      }
+    })
+    .catch(() => {
+      // Si el backend no está disponible, el WhatsApp ya se abrió igual
+      mostrarToast('Mensaje enviado por WhatsApp ✅');
+    });
 
-    // Abrir WhatsApp de inmediato (gesto directo del usuario) para evitar bloqueo de popup en móviles
-    window.open(url, '_blank');
-    mostrarToast('¡Mensaje listo en WhatsApp! 🌿');
-
-    // Limpiar formulario
+    // 3. Limpiar formulario
     campoNombre.value  = '';
     campoEmail.value   = '';
     campoMensaje.value = '';
@@ -461,6 +480,8 @@ if (navLinks.length && secciones.length) {
 const selectoresReveal = [
   '.estadisticas-grid',
   '.carrusel',
+  '.pasos-grid',
+  '.como-funciona-tip',
   '.carrusel-precios',
   '.seccion-encabezado',
   '.marca-encabezado',
