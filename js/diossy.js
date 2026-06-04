@@ -295,8 +295,9 @@ if (seccionEstadisticas && numeros.length) {
    FORMULARIO — ENVÍO POR WHATSAPP + GUARDADO EN API
    ================================================ */
 
-// Cambia esta URL cuando el backend esté en producción
-const API_URL = 'http://localhost:8080/api/contactos';
+const API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:8080/api/contactos'
+  : `http://${window.location.hostname}:8080/api/contactos`;
 
 const btnWaForm = document.getElementById('btn-whatsapp-form');
 
@@ -331,12 +332,18 @@ if (btnWaForm) {
       return;
     }
 
-    // 1. Abrir WhatsApp de inmediato (gesto directo → no se bloquea en móvil)
+    // 1. Abrir WhatsApp — se usa anchor en vez de window.open() para evitar el bloqueador de popups
     const productoTexto = campoProducto && campoProducto.value
       ? `Producto de interés: ${campoProducto.selectedOptions[0].text}\n`
       : '';
     const textoWa = `Hola Diossy Capilar! 🌿\n\nNombre: ${nombre}\nCorreo: ${email}\n${productoTexto}Mensaje: ${mensaje}`;
-    window.open(`https://wa.me/573127786165?text=${encodeURIComponent(textoWa)}`, '_blank');
+    const _linkWa = document.createElement('a');
+    _linkWa.href = `https://wa.me/573127786165?text=${encodeURIComponent(textoWa)}`;
+    _linkWa.target = '_blank';
+    _linkWa.rel = 'noopener noreferrer';
+    document.body.appendChild(_linkWa);
+    _linkWa.click();
+    document.body.removeChild(_linkWa);
 
     // 2. Guardar en la base de datos via API (en paralelo)
     fetch(API_URL, {
@@ -675,6 +682,7 @@ if (elementosReveal.length) {
     const pct = Math.round(((i + 1) / preguntas.length) * 100);
 
     document.getElementById('quiz-progreso-fill').style.width     = pct + '%';
+    document.querySelector('.quiz-progreso-barra').setAttribute('aria-valuenow', pct);
     document.getElementById('quiz-progreso-label').textContent    = `Pregunta ${i + 1} de ${preguntas.length}`;
     document.getElementById('quiz-icono-pregunta').textContent    = p.icono;
     document.getElementById('quiz-pregunta-texto').textContent    = p.texto;

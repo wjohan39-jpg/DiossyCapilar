@@ -251,6 +251,7 @@ body {
   font-size: var(--texto-normal);
   color: var(--color-texto-principal);
   background-color: var(--color-menta);
+  overflow-x: hidden;
 }
 
 ul  { list-style: none; }
@@ -647,7 +648,7 @@ section header,
   content: '';
   position: absolute;
   inset: -20%;
-  background-image: url('/multimedia/fotoHerot.png');
+  background-image: url('/multimedia/fotoHerot.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -817,6 +818,8 @@ section header,
   position: relative;
   overflow: hidden;
   border-radius: var(--borde-tarjeta);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .carrusel-pista {
@@ -828,6 +831,7 @@ section header,
   min-width: 100%;
   height: 600px;
   position: relative;
+  overflow: hidden;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -985,7 +989,7 @@ section header,
 .estrellas-numero {
   font-size: 0.9rem;
   font-weight: bold;
-  color: #f4a261;
+  color: #7a4210;
   margin-left: 6px;
   background-color: rgba(244, 162, 97, 0.15);
   padding: 2px 8px;
@@ -1407,7 +1411,7 @@ section header,
   margin: 0;
 }
 
-.quiz-res-precio { font-size: 0.88rem; font-weight: 700; color: #c9a84c; }
+.quiz-res-precio { font-size: 0.88rem; font-weight: 700; color: #7a5200; }
 
 .quiz-res-comprar {
   display: inline-flex;
@@ -1484,7 +1488,7 @@ section header,
 .rutina-card-badge {
   display: inline-block;
   background: #fce4ef;
-  color: var(--color-uva);
+  color: #8b2a50;
   font-size: 0.78rem;
   font-weight: 700;
   padding: 0.3rem 0.9rem;
@@ -1495,7 +1499,7 @@ section header,
 
 .rutina-badge-diaria {
   background: rgba(201, 168, 76, 0.13);
-  color: #a07828;
+  color: #7a5a00;
 }
 
 .rutina-card-titulo {
@@ -1826,6 +1830,37 @@ section header,
 .como-funciona-tip strong { color: #c9a84c; }
 
 /* ================================================
+   VIDEO: MÍRALO EN ACCIÓN (dentro de cómo funciona)
+   ================================================ */
+
+.cf-video-bloque {
+  margin-top: var(--espaciado-l);
+  text-align: center;
+}
+
+.cf-video-titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.8rem;
+  color: var(--color-verde-oscuro);
+  margin-bottom: 0.4rem;
+}
+
+.cf-video-desc {
+  font-size: 1rem;
+  color: var(--color-texto-suave);
+  margin-bottom: 1.5rem;
+}
+
+.cf-video {
+  width: 100%;
+  max-width: 780px;
+  border-radius: var(--borde-tarjeta);
+  box-shadow: 0 8px 32px rgba(44, 15, 30, 0.18);
+  display: block;
+  margin: 0 auto;
+}
+
+/* ================================================
    SECCIÓN MARCA
    ================================================ */
 
@@ -1921,11 +1956,11 @@ section header,
    FONDOS DE PRODUCTOS
    ================================================ */
 
-.banano-fondo    { background-image: url('/multimedia/BananoFondo.jpg'); background-size: cover; background-position: center; position: relative; }
-.zanahoria-fondo { background-image: url('/multimedia/ZanahoriaFondo.jpg'); background-size: cover; background-position: center; position: relative; }
-.biotina-fondo   { background-image: url('/multimedia/BiotinaFondo.jpg'); background-size: cover; background-position: center; position: relative; }
-.cebolla-fondo   { background-image: url('/multimedia/CebollaFondo.jpg'); background-size: cover; background-position: center; position: relative; }
-.romero-fondo    { background-image: url('/multimedia/RomeroFondo.jpg'); background-size: cover; background-position: center; position: relative; }
+.banano-fondo    { background-image: url('/multimedia/BananoFondo.webp'); background-size: cover; background-position: center; position: relative; }
+.zanahoria-fondo { background-image: url('/multimedia/ZanahoriaFondo.webp'); background-size: cover; background-position: center; position: relative; }
+.biotina-fondo   { background-image: url('/multimedia/BiotinaFondo.webp'); background-size: cover; background-position: center; position: relative; }
+.cebolla-fondo   { background-image: url('/multimedia/CebollaFondo.webp'); background-size: cover; background-position: center; position: relative; }
+.romero-fondo    { background-image: url('/multimedia/RomeroFondo.webp'); background-size: cover; background-position: center; position: relative; }
 
 .banano-fondo::before,
 .zanahoria-fondo::before,
@@ -2621,11 +2656,16 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
     justify-content: flex-start;
   }
 
-  body > header .btn-verde,
-  body > header .btn-blanco { font-size: 0.8rem; padding: 0.5rem 0.9rem; }
-  body > header .btn-verde  { margin-left: auto; }
+  body > header .btn-blanco { display: none; }
+  body > header .btn-verde  { font-size: 0.8rem; padding: 0.5rem 0.9rem; margin-left: auto; }
 
   .hero > .badge-hero { display: none; }
+
+  .hero { padding: var(--espaciado-l) var(--espaciado-s); min-height: 85vh; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero .subtitulo-linea { font-size: 1.2rem; }
+  .hero .btn-verde,
+  .hero .btn-blanco { min-width: 0; width: 100%; max-width: 320px; }
 
   .productos-destacados,
   .testimonios,
@@ -2678,6 +2718,8 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   .pasos-grid         { grid-template-columns: 1fr 1fr; gap: var(--espaciado-m) var(--espaciado-s); }
   .paso-flecha        { display: none; }
   .como-funciona-tip  { flex-direction: column; gap: 0.5rem; }
+  .cf-video-titulo    { font-size: 1.4rem; }
+  .cf-video           { border-radius: 4px; }
 
   .estadisticas-grid { grid-template-columns: repeat(2, 1fr); gap: var(--espaciado-s); }
 
@@ -2725,6 +2767,8 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   .marca-sellos { grid-template-columns: 1fr; }
   .logo { font-size: 1rem; }
   .pasos-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.8rem; }
+  .hero .subtitulo-linea { font-size: 1rem; }
 }
 
 /* ================================================
@@ -2820,7 +2864,7 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
 
 .btn-cookie-aceptar {
   background-color: var(--color-verde);
-  color: #ffffff;
+  color: #2c0f1e;
   border: none;
   padding: 0.5rem 1.1rem;
   border-radius: var(--borde-boton);

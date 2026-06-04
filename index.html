@@ -40,7 +40,8 @@
   <!-- Fuentes Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"></noscript>
 
   <!-- Estilos y favicon -->
   <link rel="stylesheet" href="css/diossy.css">
@@ -120,7 +121,7 @@
   ================================================ -->
   <div id="loader" role="status" aria-label="Cargando Diossy Capilar">
     <div class="loader-contenido">
-      <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" class="loader-logo" loading="eager" fetchpriority="high" width="200" height="200">
+      <img src="/multimedia/logo-removebg-preview.webp" alt="Logo Diossy Capilar" class="loader-logo" loading="eager" fetchpriority="high" width="200" height="200">
       <div class="loader-spinner"></div>
       <p class="loader-texto">Cargando experiencia natural...</p>
     </div>
@@ -131,7 +132,7 @@
   ================================================ -->
   <header>
     <a href="#inicio" class="logo">
-      <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" class="logo-img" loading="eager" fetchpriority="high" width="110" height="55">
+      <img src="/multimedia/logo-removebg-preview.webp" alt="Logo Diossy Capilar" class="logo-img" loading="eager" fetchpriority="high" width="110" height="55">
     </a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-principal">
       <span class="nav-toggle-barra" aria-hidden="true"></span>
@@ -271,9 +272,9 @@
           <article class="carrusel-slide banano-fondo" aria-label="Shampoo y Tratamiento de Banano">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/shampoo banano.png" alt="Botella de Shampoo de Banano Diossy Capilar" loading="lazy" width="280" height="420">
+              <img src="/multimedia/shampoo-banano.webp" alt="Botella de Shampoo de Banano Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
-                <div class="estrellas" aria-label="Calificación 4.8 de 5 estrellas">
+                <div class="estrellas" role="img" aria-label="Calificación 4.8 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
                   <span class="estrellas-numero">4.8</span>
                 </div>
@@ -281,13 +282,13 @@
                 <p>Los nutrientes del banano aportan hidratación y brillo a las puntas. Contiene extractos naturales de banano, L-arginina, Keratina, Cacao y Coco. Alta hidratación y recuperación de puntas secas.</p>
                 <section class="beneficios" aria-label="Beneficios del producto">
                   <p class="beneficio-etiqueta">Hidratación</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="100"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Hidratación: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="100"></div></div>
                   <p class="beneficio-etiqueta">Suavidad</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="95"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Suavidad: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="95"></div></div>
                   <p class="beneficio-etiqueta">Brillo</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Brillo: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
                   <p class="beneficio-etiqueta">Crecimiento</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="85"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Crecimiento: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="85"></div></div>
                 </section>
                 <div class="slide-acciones">
                   <span class="slide-precio">Kit desde <strong>$65.000</strong></span>
@@ -312,9 +313,9 @@
           <article class="carrusel-slide zanahoria-fondo" aria-label="Shampoo y Tratamiento de Zanahoria">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/shampoo zanahoria.png" alt="Botella de Shampoo de Zanahoria Diossy Capilar" loading="lazy" width="280" height="420">
+              <img src="/multimedia/shampoo-zanahoria.webp" alt="Botella de Shampoo de Zanahoria Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
-                <div class="estrellas" aria-label="Calificación 4.7 de 5 estrellas">
+                <div class="estrellas" role="img" aria-label="Calificación 4.7 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
                   <span class="estrellas-numero">4.7</span>
                 </div>
@@ -322,13 +323,13 @@
                 <p>Las vitaminas C y E de la zanahoria logran un relleno molecular reconstructor. Extractos naturales de zanahoria, argán, guaraná y biotina. Recupera el brillo y la suavidad del cabello.</p>
                 <section class="beneficios" aria-label="Beneficios del producto">
                   <p class="beneficio-etiqueta">Hidratación</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Hidratación: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
                   <p class="beneficio-etiqueta">Suavidad</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="100"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Suavidad: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="100"></div></div>
                   <p class="beneficio-etiqueta">Brillo</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="95"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Brillo: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="95"></div></div>
                   <p class="beneficio-etiqueta">Crecimiento</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Crecimiento: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
                 </section>
                 <div class="slide-acciones">
                   <span class="slide-precio">Kit desde <strong>$60.000</strong></span>
@@ -353,9 +354,9 @@
           <article class="carrusel-slide biotina-fondo" aria-label="Shampoo y Tratamiento de Biotina">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/shampoobiotina.png" alt="Botella de Shampoo de Biotina Diossy Capilar" loading="lazy" width="280" height="420">
+              <img src="/multimedia/shampoobiotina.webp" alt="Botella de Shampoo de Biotina Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
-                <div class="estrellas" aria-label="Calificación 4.9 de 5 estrellas">
+                <div class="estrellas" role="img" aria-label="Calificación 4.9 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
                   <span class="estrellas-numero">4.9</span>
                 </div>
@@ -363,13 +364,13 @@
                 <p>Extractos naturales de Cannabis, Biotina, Arroz, Fitoestimulinas y vitaminas. Engrosa el cabello aportando brillo y fuerza. Estimula el crecimiento y aporta grosor y vitalidad.</p>
                 <section class="beneficios" aria-label="Beneficios del producto">
                   <p class="beneficio-etiqueta">Hidratación</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Hidratación: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
                   <p class="beneficio-etiqueta">Suavidad</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="80"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Suavidad: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="80"></div></div>
                   <p class="beneficio-etiqueta">Brillo</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="85"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Brillo: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="85"></div></div>
                   <p class="beneficio-etiqueta">Crecimiento</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="100"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Crecimiento: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="100"></div></div>
                 </section>
                 <div class="slide-acciones">
                   <span class="slide-precio">Kit desde <strong>$60.000</strong></span>
@@ -394,9 +395,9 @@
           <article class="carrusel-slide cebolla-fondo" aria-label="Shampoo y Tratamiento de Cebolla">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/shampoocebolla.png" alt="Botella de Shampoo de Cebolla Diossy Capilar" loading="lazy" width="280" height="420">
+              <img src="/multimedia/shampoocebolla.webp" alt="Botella de Shampoo de Cebolla Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
-                <div class="estrellas" aria-label="Calificación 4.6 de 5 estrellas">
+                <div class="estrellas" role="img" aria-label="Calificación 4.6 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
                   <span class="estrellas-numero">4.6</span>
                 </div>
@@ -404,13 +405,13 @@
                 <p>Regula la grasa capilar por su alto contenido de azufre, vitamina C y aceites naturales. Propiedades purificantes, antisépticas y antioxidantes. Cabello fuerte, limpio y brillante.</p>
                 <section class="beneficios" aria-label="Beneficios del producto">
                   <p class="beneficio-etiqueta">Hidratación</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Hidratación: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
                   <p class="beneficio-etiqueta">Suavidad</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Suavidad: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
                   <p class="beneficio-etiqueta">Brillo</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="100"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Brillo: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="100"></div></div>
                   <p class="beneficio-etiqueta">Crecimiento</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="92"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Crecimiento: 92%" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="92"></div></div>
                 </section>
                 <div class="slide-acciones">
                   <span class="slide-precio">Kit desde <strong>$60.000</strong></span>
@@ -435,9 +436,9 @@
           <article class="carrusel-slide romero-fondo" aria-label="Loción de Romero">
             <div class="slide-overlay" aria-hidden="true"></div>
             <div class="slide-contenido">
-              <img src="/multimedia/locionromero.png" alt="Frasco de Loción de Romero Diossy Capilar" loading="lazy" width="280" height="420">
+              <img src="/multimedia/locionromero.webp" alt="Frasco de Loción de Romero Diossy Capilar" loading="lazy" width="280" height="420">
               <div class="slide-info">
-                <div class="estrellas" aria-label="Calificación 4.8 de 5 estrellas">
+                <div class="estrellas" role="img" aria-label="Calificación 4.8 de 5 estrellas">
                   <span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span>
                   <span class="estrellas-numero">4.8</span>
                 </div>
@@ -445,13 +446,13 @@
                 <p>Activador capilar con estimulantes del crecimiento. Extractos naturales de Romero, Quina, Ortiga, Biotina, B5, Capuchina y Ginko Biloba. Para mejores resultados aplicar diariamente.</p>
                 <section class="beneficios" aria-label="Beneficios del producto">
                   <p class="beneficio-etiqueta">Hidratación</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Hidratación: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="90"></div></div>
                   <p class="beneficio-etiqueta">Suavidad</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="78"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Suavidad: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="78"></div></div>
                   <p class="beneficio-etiqueta">Brillo</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="85"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Brillo: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="85"></div></div>
                   <p class="beneficio-etiqueta">Crecimiento</p>
-                  <div class="barra-fondo" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="92"></div></div>
+                  <div class="barra-fondo" role="progressbar" aria-label="Crecimiento: 92%" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"><div class="barra-relleno" data-porcentaje="92"></div></div>
                 </section>
                 <div class="slide-acciones">
                   <span class="slide-precio">Loción desde <strong>$25.000</strong></span>
@@ -507,7 +508,7 @@
         <!-- ESTADO 1: Inicio -->
         <div class="quiz-inicio" id="quiz-inicio">
           <div class="quiz-inicio-logo" aria-hidden="true">
-            <img src="/multimedia/logo-removebg-preview.png" alt="" class="quiz-logo-img" loading="eager">
+            <img src="/multimedia/logo-removebg-preview.webp" alt="" class="quiz-logo-img" loading="eager">
           </div>
           <p class="quiz-badge-tiempo">⏱ Solo toma 1 minuto</p>
           <button class="quiz-btn-start" id="quiz-btn-start">Descubrir mi shampoo ideal →</button>
@@ -516,7 +517,7 @@
         <!-- ESTADO 2: Preguntas -->
         <div class="quiz-preguntas" id="quiz-preguntas" hidden>
           <div class="quiz-progreso-wrap">
-            <div class="quiz-progreso-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div class="quiz-progreso-barra" role="progressbar" aria-label="Progreso del quiz" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
               <div class="quiz-progreso-fill" id="quiz-progreso-fill" style="width:33%"></div>
             </div>
             <span class="quiz-progreso-label" id="quiz-progreso-label" aria-live="polite">Pregunta 1 de 3</span>
@@ -600,6 +601,18 @@
         <span class="tip-icono" aria-hidden="true">🌿</span>
         <p><strong>Tip Diossy:</strong> Potencia los resultados con la Loción de Romero. Aplica directamente en el cuero cabelludo mañana y noche, realiza un masaje circular de 1 minuto. No requiere enjuague — ¡resultados visibles desde la semana 3!</p>
       </div>
+
+      <!-- VIDEO: Míralo en Acción -->
+      <div class="cf-video-bloque">
+        <h3 class="cf-video-titulo">Míralo en Acción</h3>
+        <p class="cf-video-desc">Sigue estos sencillos pasos y transforma tu cabello con Diossy Capilar.</p>
+        <video class="cf-video" controls playsinline preload="none" poster="/multimedia/fotoHero.webp"
+               aria-label="Video demostrativo de la rutina capilar Diossy">
+          <source src="/multimedia/MiraloenAccion.mp4" type="video/mp4">
+          <track kind="captions" src="/multimedia/MiraloenAccion.vtt" srclang="es" label="Español" default>
+        </video>
+      </div>
+
     </section>
 
     <!-- ================================================
@@ -685,11 +698,11 @@
       <!-- Kit Completo CTA -->
       <div class="rutina-kit">
         <div class="rutina-kit-imagenes" aria-hidden="true">
-          <img src="/multimedia/shampoo banano.png" alt="" class="rutina-kit-img" loading="lazy">
+          <img src="/multimedia/shampoo-banano.webp" alt="" class="rutina-kit-img" loading="lazy">
           <span class="rutina-kit-plus">+</span>
-          <img src="/multimedia/shampoobiotina.png" alt="" class="rutina-kit-img" loading="lazy">
+          <img src="/multimedia/shampoobiotina.webp" alt="" class="rutina-kit-img" loading="lazy">
           <span class="rutina-kit-plus">+</span>
-          <img src="/multimedia/locionromero.png" alt="" class="rutina-kit-img" loading="lazy">
+          <img src="/multimedia/locionromero.webp" alt="" class="rutina-kit-img" loading="lazy">
         </div>
         <div class="rutina-kit-info">
           <h3 class="rutina-kit-titulo">Kit Rutina Completa</h3>
@@ -723,7 +736,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen banano-fondo">
-              <img src="/multimedia/shampoo banano.png" alt="Shampoo y Tratamiento de Banano" loading="lazy">
+              <img src="/multimedia/shampoo-banano.webp" alt="Shampoo y Tratamiento de Banano" loading="lazy">
             </div>
             <div class="precio-info">
               <h3>Shampoo y Tratamiento de Banano</h3>
@@ -742,7 +755,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen zanahoria-fondo">
-              <img src="/multimedia/shampoo zanahoria.png" alt="Shampoo y Tratamiento de Zanahoria" loading="lazy">
+              <img src="/multimedia/shampoo-zanahoria.webp" alt="Shampoo y Tratamiento de Zanahoria" loading="lazy">
             </div>
             <div class="precio-info">
               <h3>Shampoo y Tratamiento de Zanahoria</h3>
@@ -761,7 +774,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen biotina-fondo">
-              <img src="/multimedia/shampoobiotina.png" alt="Shampoo y Tratamiento de Biotina" loading="lazy">
+              <img src="/multimedia/shampoobiotina.webp" alt="Shampoo y Tratamiento de Biotina" loading="lazy">
             </div>
             <div class="precio-info">
               <h3>Shampoo y Tratamiento de Biotina</h3>
@@ -780,7 +793,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen cebolla-fondo">
-              <img src="/multimedia/shampoocebolla.png" alt="Shampoo y Tratamiento de Cebolla" loading="lazy">
+              <img src="/multimedia/shampoocebolla.webp" alt="Shampoo y Tratamiento de Cebolla" loading="lazy">
             </div>
             <div class="precio-info">
               <h3>Shampoo y Tratamiento de Cebolla</h3>
@@ -799,7 +812,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen romero-fondo">
-              <img src="/multimedia/locionromero.png" alt="Loción de Romero" loading="lazy">
+              <img src="/multimedia/locionromero.webp" alt="Loción de Romero" loading="lazy">
             </div>
             <div class="precio-info">
               <h3>Loción de Romero</h3>
@@ -897,7 +910,7 @@
         <li>
           <article class="testimonio-card">
             <blockquote><p>"Mi Cabello cambió completamente en solo tres semanas. El Shampoo de banano es suave pero potente, el olor natural es increíble. Diossy Capilar es mi marca de ahora en adelante".</p></blockquote>
-            <div class="estrellas" aria-label="5 estrellas"><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span></div>
+            <div class="estrellas" role="img" aria-label="5 estrellas"><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span></div>
             <figure class="cliente-info">
               <div class="cliente-avatar" style="background: linear-gradient(135deg, #e8688a, #c9405a);" aria-hidden="true">MA</div>
               <figcaption>
@@ -910,11 +923,11 @@
         <li>
           <article class="testimonio-card">
             <blockquote><p>"El tratamiento de Zanahoria regeneró mi Cabello dañado. Es notable la diferencia en brillo y textura. Productos naturales que realmente funcionan sin comprometer la calidad".</p></blockquote>
-            <div class="estrellas" aria-label="5 estrellas"><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span></div>
+            <div class="estrellas" role="img" aria-label="5 estrellas"><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span></div>
             <figure class="cliente-info">
               <div class="cliente-avatar" style="background: linear-gradient(135deg, #9b6dd4, #6a3fa6);" aria-hidden="true">CR</div>
               <figcaption>
-                <strong>Catalina Restrepo</strong>
+                <strong>Alicia Avendaño</strong>
                 <span>📍 Andes</span>
               </figcaption>
             </figure>
@@ -923,11 +936,11 @@
         <li>
           <article class="testimonio-card">
             <blockquote><p>"Llevaba años buscando una loción que no fuera pegajosa. La loción de Romero de Diossy Capilar es perfecta: hidrata sin dejar residuos. Es mi producto favorito".</p></blockquote>
-            <div class="estrellas" aria-label="5 estrellas"><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span></div>
+            <div class="estrellas" role="img" aria-label="5 estrellas"><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span></div>
             <figure class="cliente-info">
               <div class="cliente-avatar" style="background: linear-gradient(135deg, #c9a84c, #a07828);" aria-hidden="true">DM</div>
               <figcaption>
-                <strong>Daniela Munera</strong>
+                <strong>Mercedes Munera</strong>
                 <span>📍 Medellín</span>
               </figcaption>
             </figure>
@@ -936,7 +949,7 @@
         <li>
           <article class="testimonio-card">
             <blockquote><p>"Los tratamientos con Biotina transformaron mi cabello frágil en cabello fuerte y brillante. No son promesas vacías, son resultados que se ven y se sienten".</p></blockquote>
-            <div class="estrellas" aria-label="5 estrellas"><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span></div>
+            <div class="estrellas" role="img" aria-label="5 estrellas"><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span><span aria-hidden="true">⭐</span></div>
             <figure class="cliente-info">
               <div class="cliente-avatar" style="background: linear-gradient(135deg, #e07878, #c94050);" aria-hidden="true">LM</div>
               <figcaption>
@@ -973,8 +986,8 @@
           <div class="galeria-slide"><video controls preload="metadata" title="Video Diossy Capilar"><source src="/multimedia/videoGir.mp4" type="video/mp4"></video></div>
           <div class="galeria-slide"><video controls preload="metadata" title="Video presentación Diossy Capilar"><source src="/multimedia/VideoDiossy.mp4" type="video/mp4"></video></div>
           <div class="galeria-slide"><video controls preload="metadata" title="Video arrastre Diossy Capilar"><source src="/multimedia/VideoArrastre.mp4" type="video/mp4"></video></div>
-          <div class="galeria-slide"><img src="/multimedia/Modelo1.jpg" alt="Resultado de uso de productos Diossy Capilar en modelo" loading="lazy"></div>
-          <div class="galeria-slide"><img src="/multimedia/Modelo2.jpeg" alt="Resultado de uso de productos Diossy Capilar en modelo 2" loading="lazy"></div>
+          <div class="galeria-slide"><img src="/multimedia/Modelo1.webp" alt="Resultado de uso de productos Diossy Capilar en modelo" loading="lazy"></div>
+          <div class="galeria-slide"><img src="/multimedia/Modelo2.webp" alt="Resultado de uso de productos Diossy Capilar en modelo 2" loading="lazy"></div>
         </div>
 
         <div class="galeria-puntos" role="tablist" aria-label="Navegación de la galería">
@@ -1228,7 +1241,7 @@
   <div class="chat-burbuja" id="chat-burbuja" role="dialog" aria-label="Chat con Diossy Capilar" aria-modal="true">
     <div class="chat-header">
       <div class="chat-header-info">
-        <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" class="chat-logo">
+        <img src="/multimedia/logo-removebg-preview.webp" alt="Logo Diossy Capilar" class="chat-logo">
         <div>
           <strong>Diossy Capilar</strong>
           <span class="chat-estado">🟢 En línea</span>
@@ -1268,6 +1281,6 @@
     </div>
   </div>
 
-  <script src="js/diossy.js"></script>
+  <script src="js/diossy.js" defer></script>
 </body>
 </html>
