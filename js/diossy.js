@@ -13,9 +13,13 @@
    LOADER
    ================================================ */
 
+// Máximo 3s de espera para el loader — evita quedarse pegado en móvil/iOS
+const _loaderEl = document.getElementById('loader');
+const _ocultarLoader = () => { if (_loaderEl) _loaderEl.classList.add('oculto'); };
+const _timerMaxLoader = setTimeout(_ocultarLoader, 3000);
 window.addEventListener('load', () => {
-  const loader = document.getElementById('loader');
-  if (loader) setTimeout(() => loader.classList.add('oculto'), 1500);
+  clearTimeout(_timerMaxLoader);
+  setTimeout(_ocultarLoader, 400);
 });
 
 /* ================================================

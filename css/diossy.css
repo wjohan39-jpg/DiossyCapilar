@@ -240,7 +240,11 @@ html.dark .sello-card:hover {
   box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
 
 /* Compensa el header sticky al navegar por anclas */
 section[id],
@@ -252,7 +256,12 @@ body {
   color: var(--color-texto-principal);
   background-color: var(--color-menta);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Elimina el flash gris/azul al tocar elementos en iOS */
+* { -webkit-tap-highlight-color: transparent; }
 
 ul  { list-style: none; }
 a   { text-decoration: none; color: inherit; }
@@ -427,6 +436,7 @@ body > header {
   gap: 1rem;
   padding: 0.4rem 2rem;
   background-color: var(--color-menta-header);
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -2416,8 +2426,8 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
 
 .fab-container {
   position: fixed;
-  bottom: 28px;
-  right: 24px;
+  bottom: max(28px, env(safe-area-inset-bottom, 28px));
+  right: max(24px, env(safe-area-inset-right, 24px));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2483,8 +2493,8 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
 
 .chat-abrir {
   position: fixed;
-  bottom: 100px;
-  left: 24px;
+  bottom: max(100px, calc(76px + env(safe-area-inset-bottom, 0px)));
+  left: max(24px, env(safe-area-inset-left, 24px));
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -2841,6 +2851,7 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   background-color: var(--color-verde-oscuro);
   color: #f9d0e0;
   padding: 1rem 2rem;
+  padding-bottom: max(1rem, calc(0.5rem + env(safe-area-inset-bottom, 0px)));
   display: flex;
   align-items: center;
   justify-content: space-between;
