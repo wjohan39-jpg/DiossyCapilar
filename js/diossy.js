@@ -791,6 +791,101 @@ if (elementosReveal.length) {
 })();
 
 /* ================================================
+   LIKE — BOTÓN DE ME GUSTA
+   ================================================ */
+
+(function () {
+  const LIKES_API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8080/api/likes'
+    : `http://${window.location.hostname}:8080/api/likes`;
+
+  const likeBtn       = document.getElementById('like-btn');
+  const likeNumero    = document.getElementById('like-numero');
+  const likePregunta  = document.getElementById('like-pregunta');
+  const likeParticulas = document.getElementById('like-particulas');
+
+  if (!likeBtn) return;
+
+  const EMOJIS = ['❤️', '⭐', '✨', '🌿', '💛', '🌸', '💫', '🌟'];
+
+  function lanzarParticulas() {
+    if (!likeParticulas) return;
+    likeParticulas.innerHTML = '';
+    const total = 22;
+    for (let i = 0; i < total; i++) {
+      const angulo    = (360 / total) * i + (Math.random() * 18 - 9);
+      const distancia = 55 + Math.random() * 70;
+      const tx        = Math.cos(angulo * Math.PI / 180) * distancia;
+      const ty        = Math.sin(angulo * Math.PI / 180) * distancia;
+      const duracion  = 550 + Math.random() * 350;
+      const rot       = Math.random() * 360 - 180;
+      const tamaño    = 0.75 + Math.random() * 1;
+      const emoji     = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+      const retraso   = Math.random() * 120;
+
+      const p = document.createElement('span');
+      p.textContent = emoji;
+      p.className   = 'like-particula';
+      p.style.cssText = `
+        --tx: ${tx}px; --ty: ${ty}px; --rot: ${rot}deg;
+        font-size: ${tamaño}rem;
+        animation: like-particula-volar ${duracion}ms ${retraso}ms ease-out both;
+      `;
+      likeParticulas.appendChild(p);
+      p.addEventListener('animationend', () => p.remove(), { once: true });
+    }
+  }
+
+  function actualizarContador(total) {
+    if (!likeNumero) return;
+    likeNumero.textContent = total.toLocaleString('es-CO');
+    likeNumero.classList.remove('rebote');
+    void likeNumero.offsetWidth;
+    likeNumero.classList.add('rebote');
+  }
+
+  // Cargar total al iniciar
+  fetch(LIKES_API)
+    .then(r => r.json())
+    .then(d => actualizarContador(d.total))
+    .catch(() => { if (likeNumero) likeNumero.textContent = '···'; });
+
+  // Restaurar estado si ya dio like
+  if (localStorage.getItem('diossy-like') === 'true') {
+    likeBtn.classList.add('liked');
+    likeBtn.setAttribute('aria-pressed', 'true');
+    if (likePregunta) likePregunta.textContent = '¡Gracias por tu amor! 🌿';
+  }
+
+  likeBtn.addEventListener('click', () => {
+    if (localStorage.getItem('diossy-like') === 'true') {
+      mostrarToast('¡Ya diste tu amor a Diossy! 💛', '💛');
+      return;
+    }
+
+    // Animación inmediata
+    likeBtn.classList.add('liked', 'latiendo');
+    likeBtn.setAttribute('aria-pressed', 'true');
+    lanzarParticulas();
+    localStorage.setItem('diossy-like', 'true');
+    if (likePregunta) likePregunta.textContent = '¡Gracias por tu amor! 🌿';
+
+    likeBtn.addEventListener('animationend', () => {
+      likeBtn.classList.remove('latiendo');
+    }, { once: true });
+
+    // Enviar al backend
+    fetch(LIKES_API, { method: 'POST' })
+      .then(r => r.json())
+      .then(d => actualizarContador(d.total))
+      .catch(() => {
+        const actual = parseInt((likeNumero?.textContent || '0').replace(/\D/g, '')) || 0;
+        actualizarContador(actual + 1);
+      });
+  });
+})();
+
+/* ================================================
    AVISO DE COOKIES / PRIVACIDAD
    ================================================ */
 
