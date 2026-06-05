@@ -471,22 +471,7 @@ if (chatAbrir && chatBurbuja && chatCerrar) {
     chatAbrir.setAttribute('aria-expanded', 'false');
   });
 
-  // Abrir automáticamente después de 5s, cerrar a los 15s
-  const timerAbrir = setTimeout(() => {
-    chatBurbuja.classList.add('visible');
-    chatAbrir.setAttribute('aria-expanded', 'true');
-  }, 5000);
-
-  const timerCerrar = setTimeout(() => {
-    chatBurbuja.classList.remove('visible');
-    chatAbrir.setAttribute('aria-expanded', 'false');
-  }, 15000);
-
-  // Si el usuario cierra manualmente, cancelar los timers automáticos
-  chatCerrar.addEventListener('click', () => {
-    clearTimeout(timerAbrir);
-    clearTimeout(timerCerrar);
-  }, { once: true });
+  // El chat solo se abre si el usuario hace clic en el botón
 }
 
 /* ================================================
@@ -635,7 +620,7 @@ if (elementosReveal.length) {
     banano: {
       nombre: 'Shampoo y Tratamiento de Banano',
       desc:   'Tu cabello necesita hidratación intensiva. El Banano nutre profundamente, devuelve la suavidad y restaura el brillo natural desde la primera aplicación.',
-      img:    '/multimedia/shampoo banano.png',
+      img:    '/multimedia/shampoo-banano.webp',
       precio: 'Kit desde $65.000',
       color:  '#f4a261',
       wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20el%20Shampoo%20de%20Banano%20%F0%9F%8D%8C%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
@@ -643,7 +628,7 @@ if (elementosReveal.length) {
     zanahoria: {
       nombre: 'Shampoo y Tratamiento de Zanahoria',
       desc:   'Tu cabello pide brillo y suavidad. La Zanahoria realiza un relleno molecular que devuelve el esplendor y la textura sedosa que tu cabello merece.',
-      img:    '/multimedia/shampoo zanahoria.png',
+      img:    '/multimedia/shampoo-zanahoria.webp',
       precio: 'Kit desde $60.000',
       color:  '#e8a030',
       wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20el%20Shampoo%20de%20Zanahoria%20%F0%9F%A5%95%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
@@ -651,7 +636,7 @@ if (elementosReveal.length) {
     biotina: {
       nombre: 'Shampoo y Tratamiento de Biotina',
       desc:   'Tu cabello necesita fortaleza y volumen. La Biotina estimula el crecimiento, engrosa cada hebra y le devuelve la vitalidad que merece.',
-      img:    '/multimedia/shampoobiotina.png',
+      img:    '/multimedia/shampoobiotina.webp',
       precio: 'Kit desde $60.000',
       color:  '#27ae60',
       wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20el%20Shampoo%20de%20Biotina%20%F0%9F%92%9A%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
@@ -659,7 +644,7 @@ if (elementosReveal.length) {
     cebolla: {
       nombre: 'Shampoo y Tratamiento de Cebolla',
       desc:   'Tu cuero cabelludo necesita pureza. La Cebolla regula la grasa, limpia profundo y fortalece el cabello con sus propiedades purificantes y antioxidantes.',
-      img:    '/multimedia/shampoocebolla.png',
+      img:    '/multimedia/shampoocebolla.webp',
       precio: 'Kit desde $60.000',
       color:  '#8e44ad',
       wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20el%20Shampoo%20de%20Cebolla%20%F0%9F%A7%85%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
@@ -667,7 +652,7 @@ if (elementosReveal.length) {
     romero: {
       nombre: 'Loción de Romero',
       desc:   'Tu cabello necesita un activador de crecimiento. La Loción de Romero estimula la circulación capilar y reactiva los folículos para un crecimiento visible.',
-      img:    '/multimedia/locionromero.png',
+      img:    '/multimedia/locionromero.webp',
       precio: 'Desde $25.000',
       color:  '#c9a84c',
       wa:     'https://wa.me/573127786165?text=Hola%20Diossy%20Capilar!%20El%20quiz%20me%20recomend%C3%B3%20la%20Loci%C3%B3n%20de%20Romero%20%F0%9F%8C%BF%20%C2%BFme%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F'
