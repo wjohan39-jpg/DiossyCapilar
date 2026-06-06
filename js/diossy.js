@@ -883,7 +883,7 @@ if (elementosReveal.length) {
       .then(r => r.json())
       .then(d => actualizarContador(d.total))
       .catch(() => {
-        const actual = parseInt((likeNumero?.textContent || '0').replace(/\D/g, '')) || 0;
+        const actual = parseInt(((likeNumero ? likeNumero.textContent : '0') || '0').replace(/\D/g, '')) || 0;
         actualizarContador(actual + 1);
       });
   });
