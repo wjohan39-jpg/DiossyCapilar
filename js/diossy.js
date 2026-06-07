@@ -198,6 +198,7 @@ crearCarrusel({
 
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(max-width: 768px)').matches) return;
 
   const COLORES = [
     'rgba(255,255,255,0.82)',
@@ -512,12 +513,14 @@ if (siteHeader) {
 
 /* ================================================
    ENLACE ACTIVO EN EL NAV AL HACER SCROLL
+   — Diferido a tiempo idle (no es crítico para el render)
    ================================================ */
 
-const navLinks   = document.querySelectorAll('#nav-principal a[href^="#"]');
-const secciones  = document.querySelectorAll('section[id], footer[id]');
+function iniciarNavActivo() {
+  const navLinks  = document.querySelectorAll('#nav-principal a[href^="#"]');
+  const secciones = document.querySelectorAll('section[id], footer[id]');
+  if (!navLinks.length || !secciones.length) return;
 
-if (navLinks.length && secciones.length) {
   const observadorNav = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -532,35 +535,43 @@ if (navLinks.length && secciones.length) {
   secciones.forEach(s => observadorNav.observe(s));
 }
 
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(iniciarNavActivo, { timeout: 3000 });
+} else {
+  setTimeout(iniciarNavActivo, 300);
+}
+
 /* ================================================
    ANIMACIONES DE ENTRADA AL HACER SCROLL
+   — Diferido a tiempo idle para no bloquear el hilo principal
    ================================================ */
 
-const selectoresReveal = [
-  '.estadisticas-grid',
-  '.carrusel',
-  '.pasos-grid',
-  '.como-funciona-tip',
-  '.carrusel-precios',
-  '.seccion-encabezado',
-  '.marca-encabezado',
-  '.marca-bloque',
-  '.sello-card',
-  '.testimonio-card',
-  '.carrusel-galeria',
-  '.galeria-encabezado',
-  '.cta-final h2',
-  '.cta-final p',
-  '.faq-encabezado',
-  '.faq-item',
-  '.redes-grid',
-  '.redes-whatsapp',
-  '.footer-contacto'
-].join(', ');
+function iniciarReveal() {
+  const selectoresReveal = [
+    '.estadisticas-grid',
+    '.carrusel',
+    '.pasos-grid',
+    '.como-funciona-tip',
+    '.carrusel-precios',
+    '.seccion-encabezado',
+    '.marca-encabezado',
+    '.marca-bloque',
+    '.sello-card',
+    '.testimonio-card',
+    '.carrusel-galeria',
+    '.galeria-encabezado',
+    '.cta-final h2',
+    '.cta-final p',
+    '.faq-encabezado',
+    '.faq-item',
+    '.redes-grid',
+    '.redes-whatsapp',
+    '.footer-contacto'
+  ].join(', ');
 
-const elementosReveal = document.querySelectorAll(selectoresReveal);
+  const elementosReveal = document.querySelectorAll(selectoresReveal);
+  if (!elementosReveal.length) return;
 
-if (elementosReveal.length) {
   elementosReveal.forEach(el => el.classList.add('reveal'));
 
   const observadorReveal = new IntersectionObserver(entries => {
@@ -573,6 +584,12 @@ if (elementosReveal.length) {
   }, { threshold: 0.12 });
 
   elementosReveal.forEach(el => observadorReveal.observe(el));
+}
+
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(iniciarReveal, { timeout: 2000 });
+} else {
+  setTimeout(iniciarReveal, 200);
 }
 
 /* ================================================

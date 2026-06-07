@@ -198,6 +198,28 @@ html.dark .sello-card:hover {
 }
 
 /* ================================================
+   CONTENT-VISIBILITY — omite render de secciones fuera del viewport
+   Aplica solo en mobile (donde el CPU es el cuello de botella)
+   ================================================ */
+
+@media (max-width: 768px) {
+  .como-funciona,
+  .quiz-seccion,
+  .rutina-seccion,
+  .precios,
+  .marca,
+  .testimonios,
+  .galeria,
+  .cta-final,
+  .faq,
+  .redes-sociales,
+  footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 0px 600px;
+  }
+}
+
+/* ================================================
    SKIP TO CONTENT
    ================================================ */
 
@@ -566,33 +588,35 @@ section header,
 .rutina-kit-imagenes,
 .rutina-kit-info { position: relative; z-index: 1; }
 
-/* ---- Partículas de la sección de estadísticas ---- */
-.estadistica-particula {
-  position: absolute;
-  bottom: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0;
-}
+/* ---- Partículas — solo desktop (en mobile se saltan para reducir CSS parse) ---- */
+@media (min-width: 769px) {
+  .estadistica-particula {
+    position: absolute;
+    bottom: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+  }
 
-@keyframes particula-izq {
-  0%   { transform: translateY(0)     translateX(0)     scale(1);    opacity: 0; }
-  12%  { opacity: 1; }
-  88%  { opacity: 0.55; }
-  100% { transform: translateY(-130px) translateX(-28px) scale(0.12); opacity: 0; }
-}
-@keyframes particula-rec {
-  0%   { transform: translateY(0)     translateX(0)    scale(1);    opacity: 0; }
-  12%  { opacity: 0.85; }
-  88%  { opacity: 0.5; }
-  100% { transform: translateY(-130px) translateX(6px)  scale(0.12); opacity: 0; }
-}
-@keyframes particula-der {
-  0%   { transform: translateY(0)     translateX(0)    scale(1);    opacity: 0; }
-  12%  { opacity: 1; }
-  88%  { opacity: 0.55; }
-  100% { transform: translateY(-130px) translateX(28px) scale(0.12); opacity: 0; }
+  @keyframes particula-izq {
+    0%   { transform: translateY(0)     translateX(0)     scale(1);    opacity: 0; }
+    12%  { opacity: 1; }
+    88%  { opacity: 0.55; }
+    100% { transform: translateY(-130px) translateX(-28px) scale(0.12); opacity: 0; }
+  }
+  @keyframes particula-rec {
+    0%   { transform: translateY(0)     translateX(0)    scale(1);    opacity: 0; }
+    12%  { opacity: 0.85; }
+    88%  { opacity: 0.5; }
+    100% { transform: translateY(-130px) translateX(6px)  scale(0.12); opacity: 0; }
+  }
+  @keyframes particula-der {
+    0%   { transform: translateY(0)     translateX(0)    scale(1);    opacity: 0; }
+    12%  { opacity: 1; }
+    88%  { opacity: 0.55; }
+    100% { transform: translateY(-130px) translateX(28px) scale(0.12); opacity: 0; }
+  }
 }
 
 /* ================================================
@@ -663,6 +687,14 @@ section header,
   background-position: center;
   background-attachment: fixed;
   z-index: 0;
+}
+
+/* En mobile: scroll evita repintado por CPU (fixed deshabilita GPU compositing) */
+@media (max-width: 768px) {
+  .hero::after {
+    background-attachment: scroll;
+    inset: 0;
+  }
 }
 
 /* Fallback para iOS Safari que no soporta background-attachment: fixed */

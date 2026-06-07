@@ -10,3 +10,6 @@ database/diossy.db
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Claude Code
+.claude/

@@ -42,6 +42,9 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"></noscript>
 
+  <!-- Preload LCP — fondo del hero descubierto vía CSS, se adelanta aquí -->
+  <link rel="preload" as="image" href="/multimedia/fotoHerot.webp" fetchpriority="high">
+
   <!-- Estilos y favicon -->
   <link rel="stylesheet" href="css/diossy.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -122,7 +125,7 @@
   ================================================ -->
   <div id="loader" role="status" aria-label="Cargando Diossy Capilar">
     <div class="loader-contenido">
-      <img src="/multimedia/logo-removebg-preview.webp" alt="Logo Diossy Capilar" class="loader-logo" loading="eager" fetchpriority="high" width="200" height="200">
+      <img src="/multimedia/logo-removebg-preview.webp" alt="Logo Diossy Capilar" class="loader-logo" loading="eager" width="200" height="200">
       <div class="loader-spinner"></div>
       <p class="loader-texto">Cargando experiencia natural...</p>
     </div>
@@ -509,7 +512,7 @@
         <!-- ESTADO 1: Inicio -->
         <div class="quiz-inicio" id="quiz-inicio">
           <div class="quiz-inicio-logo" aria-hidden="true">
-            <img src="/multimedia/logo-removebg-preview.webp" alt="" class="quiz-logo-img" loading="eager">
+            <img src="/multimedia/logo-removebg-preview.webp" alt="" class="quiz-logo-img" loading="lazy" width="72" height="72">
           </div>
           <p class="quiz-badge-tiempo">⏱ Solo toma 1 minuto</p>
           <button class="quiz-btn-start" id="quiz-btn-start">Descubrir mi shampoo ideal →</button>
@@ -699,11 +702,11 @@
       <!-- Kit Completo CTA -->
       <div class="rutina-kit">
         <div class="rutina-kit-imagenes" aria-hidden="true">
-          <img src="/multimedia/shampoo-banano.webp" alt="" class="rutina-kit-img" loading="lazy">
+          <img src="/multimedia/shampoo-banano.webp" alt="" class="rutina-kit-img" loading="lazy" width="68" height="88">
           <span class="rutina-kit-plus">+</span>
-          <img src="/multimedia/shampoobiotina.webp" alt="" class="rutina-kit-img" loading="lazy">
+          <img src="/multimedia/shampoobiotina.webp" alt="" class="rutina-kit-img" loading="lazy" width="68" height="88">
           <span class="rutina-kit-plus">+</span>
-          <img src="/multimedia/locionromero.webp" alt="" class="rutina-kit-img" loading="lazy">
+          <img src="/multimedia/locionromero.webp" alt="" class="rutina-kit-img" loading="lazy" width="68" height="88">
         </div>
         <div class="rutina-kit-info">
           <h3 class="rutina-kit-titulo">Kit Rutina Completa</h3>
@@ -737,7 +740,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen banano-fondo">
-              <img src="/multimedia/shampoo-banano.webp" alt="Shampoo y Tratamiento de Banano" loading="lazy">
+              <img src="/multimedia/shampoo-banano.webp" alt="Shampoo y Tratamiento de Banano" loading="lazy" width="170" height="300">
             </div>
             <div class="precio-info">
               <h3>Shampoo y Tratamiento de Banano</h3>
@@ -756,7 +759,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen zanahoria-fondo">
-              <img src="/multimedia/shampoo-zanahoria.webp" alt="Shampoo y Tratamiento de Zanahoria" loading="lazy">
+              <img src="/multimedia/shampoo-zanahoria.webp" alt="Shampoo y Tratamiento de Zanahoria" loading="lazy" width="173" height="300">
             </div>
             <div class="precio-info">
               <h3>Shampoo y Tratamiento de Zanahoria</h3>
@@ -775,7 +778,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen biotina-fondo">
-              <img src="/multimedia/shampoobiotina.webp" alt="Shampoo y Tratamiento de Biotina" loading="lazy">
+              <img src="/multimedia/shampoobiotina.webp" alt="Shampoo y Tratamiento de Biotina" loading="lazy" width="160" height="300">
             </div>
             <div class="precio-info">
               <h3>Shampoo y Tratamiento de Biotina</h3>
@@ -794,7 +797,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen cebolla-fondo">
-              <img src="/multimedia/shampoocebolla.webp" alt="Shampoo y Tratamiento de Cebolla" loading="lazy">
+              <img src="/multimedia/shampoocebolla.webp" alt="Shampoo y Tratamiento de Cebolla" loading="lazy" width="160" height="300">
             </div>
             <div class="precio-info">
               <h3>Shampoo y Tratamiento de Cebolla</h3>
@@ -813,7 +816,7 @@
 
           <article class="precio-slide">
             <div class="precio-imagen romero-fondo">
-              <img src="/multimedia/locionromero.webp" alt="Loción de Romero" loading="lazy">
+              <img src="/multimedia/locionromero.webp" alt="Loción de Romero" loading="lazy" width="140" height="300">
             </div>
             <div class="precio-info">
               <h3>Loción de Romero</h3>
