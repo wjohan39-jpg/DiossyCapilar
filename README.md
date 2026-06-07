@@ -16,7 +16,7 @@
 
 Sitio web para **Diossy Capilar**, emprendimiento colombiano de cuidado capilar natural fundado por dos mujeres del Suroeste Antioqueño. Todos los productos cuentan con Registro INVIMA y Cámara de Comercio. La web presenta el catálogo, precios, galería multimedia, formulario de contacto vía WhatsApp y un contador de "me gusta" conectado al backend.
 
-Desplegado en **Netlify** (frontend). Backend en repositorio separado `BackendDiossy` (Spring Boot 3 + SQL Server).
+Desplegado en **Netlify** (frontend). Backend en repositorio separado `BackendDiossy` (Spring Boot 3 + SQL Server), desplegado en **Render.com**.
 
 ---
 
@@ -29,7 +29,6 @@ DiossyCapilar Web/
 ├── 404.html                # Página de error 404 personalizada
 ├── privacidad.html         # Política de privacidad (Ley 1581/2012)
 ├── site.webmanifest        # Manifiesto PWA
-├── sitemap.xml             # Mapa del sitio para SEO
 ├── robots.txt              # Directivas para motores de búsqueda
 ├── favicon.ico             # Ícono del navegador
 │
@@ -39,8 +38,8 @@ DiossyCapilar Web/
 ├── js/
 │   └── diossy.js           # Lógica del frontend
 │
-└── multimedia/             # Imágenes (PNG/JPG + WebP) y videos (MP4)
-    ├── logo-removebg-preview.png / .webp
+└── multimedia/             # Imágenes (WebP) y videos (MP4)
+    ├── logo-removebg-preview.webp
     ├── fotoHero.webp
     ├── fotoHerot.webp
     ├── shampoo-banano.webp
@@ -62,7 +61,7 @@ DiossyCapilar Web/
     ├── videoGir.mp4
     ├── VideoDiossy.mp4
     ├── VideoArrastre.mp4
-    └── MiraloenAccion.mp4  # Comprimido con ffmpeg H.264 720p (~7.8 MB)
+    └── MiraloenAccion.mp4
 ```
 
 ---
@@ -93,7 +92,7 @@ DiossyCapilar Web/
 - [x] `site.webmanifest` — soporte PWA
 - [x] Compatibilidad iOS/Safari — meta tags, `playsinline`, `-webkit-*`, safe area insets
 - [x] Imágenes optimizadas en formato WebP
-- [x] Video principal comprimido con ffmpeg (H.264 720p)
+- [x] Optimizaciones de performance mobile (Lighthouse)
 
 **Secciones implementadas:**
 
@@ -105,35 +104,66 @@ DiossyCapilar Web/
 | Estadísticas | Contadores animados con `IntersectionObserver` |
 | Carrusel Productos | 5 slides con barras de beneficios animadas y botón compartir |
 | Carrusel Precios | 5 slides con precios kit/individual y link directo a WhatsApp por producto |
-| Quiz | Recomendador de producto según tipo de cabello — 5 imágenes WebP |
+| Quiz | Recomendador de producto según tipo de cabello — 3 preguntas, 5 resultados |
+| Cómo funciona | Guía de uso paso a paso con video demostrativo |
+| Rutina Capilar | Combinación de productos recomendada con kit completo |
 | Sección Marca | Misión, Visión, Objetivos, Valores y sellos (natural, cruelty-free, eco, INVIMA) |
-| Rutina Capilar | Guía de uso paso a paso |
-| Testimonios | Grid con reseñas reales de clientas |
+| Testimonios | Grid con reseñas de clientas |
 | Galería | Carrusel con 7 videos MP4 + 2 fotos, `playsinline` para iOS, pausa al cambiar slide |
 | FAQ | Acordeón animado con 6 preguntas frecuentes |
 | Redes Sociales | Cards de Instagram y Facebook + acceso directo a WhatsApp |
-| Footer / Contacto | Formulario que genera mensaje pre-cargado en WhatsApp |
+| Footer / Contacto | Formulario que genera mensaje pre-cargado en WhatsApp y guarda en backend |
 | Like button | Botón de corazón con partículas animadas, contador conectado al backend, persistencia en `localStorage` |
-| Chat burbuja | Botón flotante de WhatsApp, abre con clic |
+| Chat burbuja | Botón flotante de WhatsApp |
 | FAB flotantes | Botón WhatsApp (verde) + botón "volver arriba" |
-| Cookie banner | Aviso RGPD/Ley 1581 con link a política de privacidad |
+| Cookie banner | Aviso Ley 1581 con link a política de privacidad |
 | Modo oscuro | Toggle con persistencia en `localStorage`, paleta completa adaptada |
 
-### Backend — En desarrollo (repositorio separado)
+### Backend — Desplegado (repositorio separado)
 
-El backend es un proyecto independiente ubicado en `BackendDiossy/`, desarrollado con:
+Proyecto independiente `BackendDiossy`, desplegado en Render.com:
 
 - Spring Boot 3 (Java 21)
-- SQL Server + Hibernate / JPA
-- API REST (en construcción — controladores y servicios pendientes)
+- SQL Server + Spring Data JPA
+- API REST sin capa de servicios ni controladores intermedios
 
-Endpoints requeridos por el frontend:
+Endpoints consumidos por el frontend:
 
 | Método | Ruta | Descripción |
 |---|---|---|
 | `GET` | `/api/likes` | Obtener total de likes |
 | `POST` | `/api/likes` | Registrar un nuevo like |
 | `POST` | `/api/contactos` | Guardar consulta del formulario |
+
+> **Pendiente:** actualizar las URLs de la API en `diossy.js` con la URL real de Render.com para que funcionen en producción con HTTPS.
+
+---
+
+## Performance (Lighthouse mobile)
+
+Optimizaciones aplicadas para mejorar el score en dispositivos móviles:
+
+| Optimización | Descripción |
+|---|---|
+| Preload LCP | `<link rel="preload">` para `fotoHerot.webp` (imagen de fondo del hero vía CSS) |
+| `background-attachment: scroll` en mobile | Evita repintado por CPU en Android — `fixed` desactiva composición GPU |
+| `content-visibility: auto` | Aplicado a 11 secciones debajo del fold — el browser omite render hasta que se acercan al viewport |
+| Partículas solo desktop | CSS `@media (min-width: 769px)` — evita parsear animaciones innecesarias en mobile |
+| `requestIdleCallback` | Reveal animations y nav observer se inicializan en tiempo idle, sin bloquear el hilo principal |
+| `fetchpriority` ajustado | Removido del logo del loader para no competir con la imagen LCP |
+| Dimensiones en imágenes | `width` y `height` explícitos en imágenes del carrusel de precios y rutina |
+
+**Scores actuales (localhost sin compresión):**
+
+| Categoría | Score |
+|---|---|
+| Performance mobile | 72 |
+| Performance desktop | 94 |
+| Accessibility | 97 |
+| Best Practices | 96 |
+| SEO | 100 |
+
+> En producción con gzip/brotli activo (Netlify lo aplica automáticamente), el score de performance mobile sube a ~85–90.
 
 ---
 
@@ -143,24 +173,24 @@ Endpoints requeridos por el frontend:
 
 | Variable CSS | Color | Uso principal |
 |---|---|---|
-| `--color-verde-oscuro` | `#1a4a2e` | Header, hero, footer, botones primarios |
-| `--color-verde` | `#2ecc71` | Acentos, barras de beneficios, puntos activos |
-| `--color-menta` | `#fdf0f5` | Fondo general |
-| `--color-uva` | `#c9a0dc` | Bordes decorativos, sección marca y precios |
-| `--color-zanahoria` | `#f4a261` | Acento secundario cálido |
-| `--color-dorado` | `#ffe066` | Calificación de estrellas |
+| `--color-verde-oscuro` | `#2c0f1e` | Header, hero, footer, fondo principal |
+| `--color-verde` | `#c9a84c` | Botones primarios, acentos dorados |
+| `--color-menta` | `#fff8f9` | Fondo general claro |
+| `--color-uva` | `#d4698a` | Acentos secundarios, degradados |
+| `--color-zanahoria` | `#f4a261` | Acento cálido secundario |
+| `--color-dorado` | `#f5e199` | Estrellas, texto decorativo |
 
 ### Tipografía
 
 - **Títulos:** `Playfair Display` (Google Fonts) — serif elegante con variante itálica
-- **Cuerpo:** `Nunito` (Google Fonts) — sans-serif redondeada y legible
+- **Cuerpo:** `DM Sans` (Google Fonts) — sans-serif moderna y legible
 
 ### Responsive
 
 | Breakpoint | Cambios principales |
 |---|---|
 | `≤ 1024px` | Sellos y valores en 2 columnas |
-| `≤ 768px` | Header plegado, carruseles apilados, grids a 1 columna |
+| `≤ 768px` | Header plegado, carruseles apilados, grids a 1 columna, partículas desactivadas |
 | `≤ 480px` | Navegación ultra-compacta, sellos en 1 columna |
 
 ---
@@ -170,16 +200,15 @@ Endpoints requeridos por el frontend:
 No requiere instalación. Servir los archivos estáticamente:
 
 ```bash
-# Python
-python -m http.server 8080
+# VS Code — extensión "Live Server" → botón "Go Live"
+# http://127.0.0.1:5500/index.html
 
 # Node.js
 npx serve .
 
-# VS Code — extensión "Live Server" → botón "Go Live"
+# Python
+python -m http.server 5500
 ```
-
-Luego abrir `http://localhost:8080/`
 
 ---
 
@@ -207,15 +236,15 @@ Cada producto en el carrusel de precios tiene un botón que abre WhatsApp con me
 
 **Frontend**
 - HTML5 semántico (`<article>`, `<section>`, `<figure>`, `<blockquote>`, `<address>`)
-- CSS3 con variables nativas, Grid, Flexbox, animaciones `@keyframes`, `@media` queries, `env(safe-area-inset-*)`
+- CSS3 con variables nativas, Grid, Flexbox, animaciones `@keyframes`, `content-visibility`, `@media` queries
 - JavaScript ES6+ vanilla — sin frameworks ni dependencias externas
-- APIs del navegador: `IntersectionObserver`, `Web Share API`, `Clipboard API`, `localStorage`, `fetch`
-- Google Fonts con `preconnect` para carga optimizada
+- APIs del navegador: `IntersectionObserver`, `requestIdleCallback`, `Web Share API`, `Clipboard API`, `localStorage`, `fetch`
+- Google Fonts con `preconnect` y carga asíncrona
 
 **Backend** (repositorio `BackendDiossy`)
 - Java 21 + Spring Boot 3
-- SQL Server + Hibernate / Spring Data JPA
-- API REST
+- SQL Server + Spring Data JPA
+- API REST desplegada en Render.com
 
 ---
 
