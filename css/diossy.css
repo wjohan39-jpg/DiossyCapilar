@@ -142,8 +142,6 @@ html.dark .chat-burbuja { background-color: var(--color-fondo-tarjeta); }
 
 /* Rutina Capilar — dark mode */
 html.dark .rutina-seccion          { background: linear-gradient(160deg, #1e0a14 0%, #2c1020 100%); }
-html.dark .rutina-header h2        { color: #f0d8e0; }
-html.dark .rutina-header p         { color: #d8c0c8; }
 html.dark .rutina-card             { background-color: #1e0a14; box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
 html.dark .rutina-card-titulo      { color: #f0d8e0; }
 html.dark .rutina-item strong      { color: #f0d8e0; }
@@ -215,8 +213,18 @@ html.dark .sello-card:hover {
   .redes-sociales,
   footer {
     content-visibility: auto;
-    contain-intrinsic-size: 0px 600px;
   }
+  .como-funciona   { contain-intrinsic-size: 0px 900px; }
+  .quiz-seccion    { contain-intrinsic-size: 0px 700px; }
+  .rutina-seccion  { contain-intrinsic-size: 0px 800px; }
+  .precios         { contain-intrinsic-size: 0px 600px; }
+  .marca           { contain-intrinsic-size: 0px 500px; }
+  .testimonios     { contain-intrinsic-size: 0px 500px; }
+  .galeria         { contain-intrinsic-size: 0px 700px; }
+  .cta-final       { contain-intrinsic-size: 0px 300px; }
+  .faq             { contain-intrinsic-size: 0px 600px; }
+  .redes-sociales  { contain-intrinsic-size: 0px 400px; }
+  footer           { contain-intrinsic-size: 0px 350px; }
 }
 
 /* ================================================
@@ -271,6 +279,9 @@ html {
 /* Compensa el header sticky al navegar por anclas */
 section[id],
 footer[id] { scroll-margin-top: 75px; }
+
+/* El elemento picture no genera caja propia — transparente al layout */
+picture { display: contents; }
 
 body {
   font-family: var(--fuente-cuerpo);
@@ -462,6 +473,7 @@ body > header {
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
 }
 
 body > header nav ul  { display: flex; gap: 1rem; }
@@ -481,9 +493,6 @@ body > header .btn-verde  { margin-left: auto; font-size: 0.85rem; padding: 0.5r
 body > header .btn-blanco { font-size: 0.85rem; padding: 0.5rem 1rem; }
 
 /* Header compacto al hacer scroll */
-body > header {
-  transition: padding 0.3s ease, box-shadow 0.3s ease;
-}
 body > header.compacto {
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
@@ -682,7 +691,7 @@ section header,
   content: '';
   position: absolute;
   inset: -20%;
-  background-image: url('/multimedia/fotoHerot.webp');
+  background-image: url('/multimedia/fotoHero.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1680,8 +1689,7 @@ section header,
   width: 68px;
   height: 88px;
   object-fit: contain;
-  filter: saturate(1.3) brightness(1.08);
-  drop-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  filter: saturate(1.3) brightness(1.08) drop-shadow(0 4px 12px rgba(0,0,0,0.25));
 }
 
 .rutina-kit-plus {
@@ -1998,11 +2006,11 @@ section header,
    FONDOS DE PRODUCTOS
    ================================================ */
 
-.banano-fondo    { background-image: url('/multimedia/BananoFondo.webp'); background-size: cover; background-position: center; position: relative; }
-.zanahoria-fondo { background-image: url('/multimedia/ZanahoriaFondo.webp'); background-size: cover; background-position: center; position: relative; }
-.biotina-fondo   { background-image: url('/multimedia/BiotinaFondo.webp'); background-size: cover; background-position: center; position: relative; }
-.cebolla-fondo   { background-image: url('/multimedia/CebollaFondo.webp'); background-size: cover; background-position: center; position: relative; }
-.romero-fondo    { background-image: url('/multimedia/RomeroFondo.webp'); background-size: cover; background-position: center; position: relative; }
+.banano-fondo    { background-image: url('/multimedia/BananoFondo.jpg'); background-size: cover; background-position: center; position: relative; }
+.zanahoria-fondo { background-image: url('/multimedia/ZanahoriaFondo.jpg'); background-size: cover; background-position: center; position: relative; }
+.biotina-fondo   { background-image: url('/multimedia/BiotinaFondo.jpg'); background-size: cover; background-position: center; position: relative; }
+.cebolla-fondo   { background-image: url('/multimedia/CebollaFondo.jpg'); background-size: cover; background-position: center; position: relative; }
+.romero-fondo    { background-image: url('/multimedia/RomeroFondo.jpg'); background-size: cover; background-position: center; position: relative; }
 
 .banano-fondo::before,
 .zanahoria-fondo::before,
@@ -2664,6 +2672,9 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
 
 @media (max-width: 768px) {
 
+  section[id],
+  footer[id] { scroll-margin-top: 90px; }
+
   body > header {
     flex-wrap: wrap;
     padding: 0.75rem 1rem;
@@ -2752,7 +2763,6 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   .quiz-wrapper         { padding: var(--espaciado-m) var(--espaciado-s); border-radius: 16px; }
   .quiz-seccion-header h2 { font-size: 1.8rem; }
   .quiz-opciones        { grid-template-columns: 1fr; }
-  .quiz-resultado-produto { flex-direction: column; align-items: center; text-align: center; }
   .quiz-resultado-producto { flex-direction: column; align-items: center; text-align: center; }
   .quiz-res-comprar     { width: 100%; justify-content: center; }
 

@@ -106,6 +106,10 @@ function crearCarrusel({ contenedor, pista, slides, puntos, btnPrev, btnNext, au
   // CORRECCIÓN: setInterval guardado en variable para poder limpiarlo si fuera necesario
   if (autoAvance > 0) {
     interval = setInterval(() => irA(indice + 1), autoAvance);
+    elContenedor.addEventListener('mouseenter', () => clearInterval(interval));
+    elContenedor.addEventListener('mouseleave', () => { interval = setInterval(() => irA(indice + 1), autoAvance); });
+    elContenedor.addEventListener('focusin',    () => clearInterval(interval));
+    elContenedor.addEventListener('focusout',   () => { interval = setInterval(() => irA(indice + 1), autoAvance); });
   }
 
   irA(0);
@@ -268,6 +272,10 @@ const INTERVALO_FRAME_MS    = DURACION_CONTADOR_MS / FRAMES_POR_SEGUNDO;
 const numeros = document.querySelectorAll('.estadistica-numero');
 
 function animarContador(elemento) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    elemento.textContent = elemento.dataset.objetivo;
+    return;
+  }
   const objetivo   = parseInt(elemento.dataset.objetivo);
   const incremento = objetivo / FRAMES_POR_SEGUNDO;
   let actual = 0;
@@ -302,7 +310,7 @@ if (seccionEstadisticas && numeros.length) {
 
 const API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? 'http://localhost:8080/api/contactos'
-  : `http://${window.location.hostname}:8080/api/contactos`;
+  : `https://${window.location.hostname}:8080/api/contactos`;
 
 const btnWaForm = document.getElementById('btn-whatsapp-form');
 
@@ -398,7 +406,7 @@ document.querySelectorAll('.btn-compartir').forEach(btn => {
         setTimeout(() => {
           btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg> Compartir`;
         }, 2000);
-      });
+      }).catch(() => {});
     }
   });
 });
@@ -818,7 +826,7 @@ if ('requestIdleCallback' in window) {
 (function () {
   const LIKES_API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
     ? 'http://localhost:8080/api/likes'
-    : `http://${window.location.hostname}:8080/api/likes`;
+    : `https://${window.location.hostname}:8080/api/likes`;
 
   const likeBtn       = document.getElementById('like-btn');
   const likeNumero    = document.getElementById('like-numero');
@@ -891,8 +899,8 @@ if ('requestIdleCallback' in window) {
     localStorage.setItem('diossy-like', 'true');
     if (likePregunta) likePregunta.textContent = '¡Gracias por tu amor! 🌿';
 
-    likeBtn.addEventListener('animationend', () => {
-      likeBtn.classList.remove('latiendo');
+    likeBtn.addEventListener('animationend', (e) => {
+      if (e.animationName === 'like-latido') likeBtn.classList.remove('latiendo');
     }, { once: true });
 
     // Enviar al backend

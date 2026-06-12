@@ -10,7 +10,8 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"></noscript>
   <style>
     body {
       min-height: 100vh;
@@ -47,7 +48,10 @@
   </style>
 </head>
 <body>
-  <img src="/multimedia/logo-removebg-preview.webp" alt="Logo Diossy Capilar" class="err-logo">
+  <picture>
+    <source srcset="/multimedia/logo-removebg-preview.webp" type="image/webp">
+    <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" class="err-logo">
+  </picture>
   <p class="err-codigo">404</p>
   <h1 class="err-titulo">Esta página no existe</h1>
   <p class="err-desc">Parece que la página que buscas no está disponible. Puede que haya sido movida o que la URL esté incorrecta.</p>

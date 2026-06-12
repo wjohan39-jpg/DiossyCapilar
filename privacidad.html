@@ -12,7 +12,8 @@
   <link rel="canonical" href="https://diossycapilar.com/privacidad.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
   <style>
     .privacidad-header {
       background: var(--color-verde-oscuro, #2c0f1e);
@@ -59,7 +60,10 @@
 
   <header class="privacidad-header">
     <a href="/">
-      <img src="/multimedia/logo-removebg-preview.webp" alt="Logo Diossy Capilar" loading="eager">
+      <picture>
+        <source srcset="/multimedia/logo-removebg-preview.webp" type="image/webp">
+        <img src="/multimedia/logo-removebg-preview.png" alt="Logo Diossy Capilar" loading="eager">
+      </picture>
     </a>
     <h1>Política de Privacidad</h1>
     <p>Última actualización: junio de 2026</p>
@@ -77,8 +81,8 @@
     </ul>
 
     <h2>2. Formulario de contacto y WhatsApp</h2>
-    <p>Cuando usas el formulario de contacto, los datos que escribes (nombre, correo, producto de interés y mensaje) se envían directamente a través de WhatsApp. Diossy Capilar recibe y maneja esos datos únicamente para atender tu consulta.</p>
-    <p>No almacenamos esos datos en bases de datos propias sin tu consentimiento explícito.</p>
+    <p>Cuando usas el formulario de contacto, los datos que escribes (nombre, correo, producto de interés y mensaje) se envían a través de WhatsApp y pueden registrarse en nuestros sistemas internos para dar seguimiento a tu consulta. Diossy Capilar maneja esos datos únicamente para atender tu solicitud.</p>
+    <p>No compartimos tus datos con terceros ni los usamos con fines publicitarios.</p>
 
     <h2>3. Cookies y almacenamiento local</h2>
     <p>Este sitio utiliza <strong>localStorage</strong> (almacenamiento local del navegador) para guardar tus preferencias. No usamos cookies de seguimiento, publicidad ni analítica de terceros.</p>

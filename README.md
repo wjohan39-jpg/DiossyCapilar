@@ -38,22 +38,21 @@ DiossyCapilar Web/
 ├── js/
 │   └── diossy.js           # Lógica del frontend
 │
-└── multimedia/             # Imágenes (WebP) y videos (MP4)
-    ├── logo-removebg-preview.webp
-    ├── fotoHero.webp
-    ├── fotoHerot.webp
-    ├── shampoo-banano.webp
-    ├── shampoo-zanahoria.webp
-    ├── shampoobiotina.webp
-    ├── shampoocebolla.webp
-    ├── locionromero.webp
-    ├── BananoFondo.webp
-    ├── ZanahoriaFondo.webp
-    ├── BiotinaFondo.webp
-    ├── CebollaFondo.webp
-    ├── RomeroFondo.webp
-    ├── Modelo1.webp
-    ├── Modelo2.webp
+└── multimedia/             # Imágenes (WebP + fallback PNG/JPG) y videos (MP4)
+    ├── logo-removebg-preview.webp / .png   # Logo (WebP preferido, PNG fallback)
+    ├── fotoHero.webp / .png                # Imagen hero (fondo del header y poster de video)
+    ├── shampoo-banano.webp / shampoo banano.png
+    ├── shampoo-zanahoria.webp / shampoo zanahoria.png
+    ├── shampoobiotina.webp / .png
+    ├── shampoocebolla.webp / .png
+    ├── locionromero.webp / .png
+    ├── BananoFondo.webp / .jpg             # Fondos de producto (CSS usa .jpg)
+    ├── ZanahoriaFondo.webp / .jpg
+    ├── BiotinaFondo.webp / .jpg
+    ├── CebollaFondo.webp / .jpg
+    ├── RomeroFondo.webp / .jpg
+    ├── Modelo1.webp / .jpg
+    ├── Modelo2.webp / .jpeg
     ├── Diossy_Capilar_Video1.mp4
     ├── video_shampo_cebolla.mp4
     ├── video_shampoo_Zanahoria.mp4
@@ -91,7 +90,8 @@ DiossyCapilar Web/
 - [x] `privacidad.html` — política de privacidad bajo Ley 1581 de 2012
 - [x] `site.webmanifest` — soporte PWA
 - [x] Compatibilidad iOS/Safari — meta tags, `playsinline`, `-webkit-*`, safe area insets
-- [x] Imágenes optimizadas en formato WebP
+- [x] Imágenes con `<picture>` + `<source type="image/webp">` — WebP preferido, PNG/JPG como fallback
+- [x] `picture { display: contents }` para compatibilidad con layouts flex/grid
 - [x] Optimizaciones de performance mobile (Lighthouse)
 
 **Secciones implementadas:**
@@ -135,7 +135,7 @@ Endpoints consumidos por el frontend:
 | `POST` | `/api/likes` | Registrar un nuevo like |
 | `POST` | `/api/contactos` | Guardar consulta del formulario |
 
-> **Pendiente:** actualizar las URLs de la API en `diossy.js` con la URL real de Render.com para que funcionen en producción con HTTPS.
+> Las URLs de la API en `diossy.js` usan `https://` en producción. Actualizar el hostname cuando el backend esté en su dominio final de Render.com.
 
 ---
 
@@ -145,7 +145,7 @@ Optimizaciones aplicadas para mejorar el score en dispositivos móviles:
 
 | Optimización | Descripción |
 |---|---|
-| Preload LCP | `<link rel="preload">` para `fotoHerot.webp` (imagen de fondo del hero vía CSS) |
+| Preload LCP | `<link rel="preload">` para `fotoHero.png` (imagen de fondo del hero vía CSS) |
 | `background-attachment: scroll` en mobile | Evita repintado por CPU en Android — `fixed` desactiva composición GPU |
 | `content-visibility: auto` | Aplicado a 11 secciones debajo del fold — el browser omite render hasta que se acercan al viewport |
 | Partículas solo desktop | CSS `@media (min-width: 769px)` — evita parsear animaciones innecesarias en mobile |
