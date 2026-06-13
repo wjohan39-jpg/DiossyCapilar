@@ -7,7 +7,22 @@
    4. FAQ actualizado con aria-expanded y atributo hidden correcto.
    5. Formulario valida manualmente (consistente con type="button").
    6. Constante nombrada para la velocidad del contador.
+   7. BACKEND_BASE_URL centralizado — evita asumir mismo hostname.
+   8. Constantes nombradas para timeouts y conteos de partículas.
+   9. Focus trap en el chat modal (accesibilidad con teclado).
    ================================================ */
+
+/* ================================================
+   CONFIGURACIÓN
+   ================================================ */
+
+const BACKEND_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:8080'
+  : 'https://TU-BACKEND.onrender.com'; // ← Reemplaza con la URL real de tu backend en Render.com
+
+const DURACION_TOAST_MS        = 3000;
+const RETRASO_COOKIE_BANNER_MS = 2500;
+const TOTAL_PARTICULAS_LIKE    = 22;
 
 /* ================================================
    LOADER
@@ -36,7 +51,7 @@ function mostrarToast(mensaje, icono = '✅') {
   if (toastIcono) toastIcono.textContent = icono;
 
   toast.classList.add('visible');
-  setTimeout(() => toast.classList.remove('visible'), 3000);
+  setTimeout(() => toast.classList.remove('visible'), DURACION_TOAST_MS);
 }
 
 /* ================================================
@@ -308,9 +323,7 @@ if (seccionEstadisticas && numeros.length) {
    FORMULARIO — ENVÍO POR WHATSAPP + GUARDADO EN API
    ================================================ */
 
-const API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://localhost:8080/api/contactos'
-  : `https://${window.location.hostname}:8080/api/contactos`;
+const API_URL = BACKEND_BASE_URL + '/api/contactos';
 
 const btnWaForm = document.getElementById('btn-whatsapp-form');
 
@@ -473,18 +486,43 @@ const chatCerrar  = document.getElementById('chat-cerrar');
 const chatNotif   = document.querySelector('.chat-notificacion');
 
 if (chatAbrir && chatBurbuja && chatCerrar) {
-  chatAbrir.addEventListener('click', () => {
-    const estaVisible = chatBurbuja.classList.toggle('visible');
-    chatAbrir.setAttribute('aria-expanded', estaVisible ? 'true' : 'false');
-    if (chatNotif) chatNotif.style.display = 'none';
-  });
+  const chatResponder = chatBurbuja.querySelector('.chat-responder');
+  const primerFoco    = chatCerrar;
+  const ultimoFoco    = chatResponder || chatCerrar;
 
-  chatCerrar.addEventListener('click', () => {
+  function abrirChat() {
+    chatBurbuja.classList.add('visible');
+    chatAbrir.setAttribute('aria-expanded', 'true');
+    if (chatNotif) chatNotif.style.display = 'none';
+    primerFoco.focus();
+  }
+
+  function cerrarChat() {
     chatBurbuja.classList.remove('visible');
     chatAbrir.setAttribute('aria-expanded', 'false');
+    chatAbrir.focus();
+  }
+
+  chatAbrir.addEventListener('click', () => {
+    chatBurbuja.classList.contains('visible') ? cerrarChat() : abrirChat();
   });
 
-  // El chat solo se abre si el usuario hace clic en el botón
+  chatCerrar.addEventListener('click', cerrarChat);
+
+  // Focus trap: Tab y Shift+Tab quedan dentro del diálogo
+  chatBurbuja.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey) {
+      if (document.activeElement === primerFoco) { e.preventDefault(); ultimoFoco.focus(); }
+    } else {
+      if (document.activeElement === ultimoFoco) { e.preventDefault(); primerFoco.focus(); }
+    }
+  });
+
+  // Escape cierra el chat y devuelve el foco al botón de apertura
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && chatBurbuja.classList.contains('visible')) cerrarChat();
+  });
 }
 
 /* ================================================
@@ -824,9 +862,7 @@ if ('requestIdleCallback' in window) {
    ================================================ */
 
 (function () {
-  const LIKES_API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-    ? 'http://localhost:8080/api/likes'
-    : `https://${window.location.hostname}:8080/api/likes`;
+  const LIKES_API = BACKEND_BASE_URL + '/api/likes';
 
   const likeBtn       = document.getElementById('like-btn');
   const likeNumero    = document.getElementById('like-numero');
@@ -840,7 +876,7 @@ if ('requestIdleCallback' in window) {
   function lanzarParticulas() {
     if (!likeParticulas) return;
     likeParticulas.innerHTML = '';
-    const total = 22;
+    const total = TOTAL_PARTICULAS_LIKE;
     for (let i = 0; i < total; i++) {
       const angulo    = (360 / total) * i + (Math.random() * 18 - 9);
       const distancia = 55 + Math.random() * 70;
@@ -923,7 +959,7 @@ const btnCookieAceptar    = document.getElementById('btn-cookie-aceptar');
 const btnCookieCerrar     = document.getElementById('btn-cookie-cerrar');
 
 if (cookieBanner && !localStorage.getItem('diossy-cookies')) {
-  setTimeout(() => cookieBanner.classList.add('visible'), 2500);
+  setTimeout(() => cookieBanner.classList.add('visible'), RETRASO_COOKIE_BANNER_MS);
 
   if (btnCookieAceptar) {
     btnCookieAceptar.addEventListener('click', () => {
@@ -937,4 +973,14 @@ if (cookieBanner && !localStorage.getItem('diossy-cookies')) {
       cookieBanner.classList.remove('visible');
     });
   }
+}
+
+/* ================================================
+   SERVICE WORKER — cache offline para assets estáticos
+   ================================================ */
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
 }
