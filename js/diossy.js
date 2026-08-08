@@ -217,7 +217,6 @@ crearCarrusel({
 
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(max-width: 768px)').matches) return;
 
   const COLORES = [
     'rgba(255,255,255,0.82)',
@@ -1013,21 +1012,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Determinar número de burbujas según ancho de pantalla
     const esMovil = window.innerWidth <= 768;
-    const totalBurbujas = esMovil ? 5 : 15; // 5 en móvil, 15 en escritorio
-
-    // Generar burbujas aleatorias
-    for (let i = 0; i < totalBurbujas; i++) {
-      const burbuja = document.createElement('span');
-      burbuja.classList.add('burbuja');
-
-      // Tamaño aleatorio
-      const tamano = tamanos[Math.floor(Math.random() * tamanos.length)];
-      burbuja.classList.add(tamano);
-
-      // Retraso aleatorio según dispositivo
-      let maxDelayIndex;
-      if (esMovil) {
-        // En móvil: retrasos de 0 a 3s, paso 0.5s → índices 0 a 6
+      const totalBurbujas = esMovil ? 7 : 15; // 7 en móvil, 15 en escritorio
         maxDelayIndex = 6;
       } else {
         // En escritorio: retrasos de 0 a 7.5s, paso 0.5s → índices 0 a 15
