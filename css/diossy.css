@@ -544,6 +544,7 @@ section header,
 #loader {
   position: fixed;
   inset: 0;
+  overflow: hidden;
   background: linear-gradient(135deg, #e8688a 0%, #c9405a 55%, #8b1a4a 100%);
   display: flex;
   align-items: center;
@@ -554,7 +555,53 @@ section header,
 
 #loader.oculto { opacity: 0; visibility: hidden; }
 
+.loader-burbujas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.loader-burbuja {
+  position: absolute;
+  bottom: -20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  animation: loader-burbuja 7s ease-in infinite;
+}
+
+.loader-burbuja.small  { width: 10px; height: 10px; }
+.loader-burbuja.medium { width: 16px; height: 16px; }
+.loader-burbuja.large  { width: 24px; height: 24px; }
+
+.loader-burbuja.delay-0 { left: 8%; animation-delay: 0s; }
+.loader-burbuja.delay-1 { left: 22%; animation-delay: 0.8s; }
+.loader-burbuja.delay-2 { left: 38%; animation-delay: 1.5s; }
+.loader-burbuja.delay-3 { left: 50%; animation-delay: 0.5s; }
+.loader-burbuja.delay-4 { left: 63%; animation-delay: 1.2s; }
+.loader-burbuja.delay-5 { left: 74%; animation-delay: 2.1s; }
+.loader-burbuja.delay-6 { left: 86%; animation-delay: 1s; }
+.loader-burbuja.delay-7 { left: 94%; animation-delay: 2.8s; }
+
+@keyframes loader-burbuja {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(18px) scale(1.25);
+    opacity: 0;
+  }
+}
+
 .loader-contenido {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2090,11 +2137,14 @@ section header,
    ================================================ */
 
 .galeria {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   padding: var(--espaciado-l) var(--espaciado-l);
   background-color: var(--color-menta);
 }
 
-.galeria-encabezado { text-align: center; margin-bottom: var(--espaciado-l); }
+.galeria-encabezado { text-align: center; margin-bottom: var(--espaciado-l); position: relative; z-index: 1; }
 
 .galeria-encabezado h2 {
   font-family: var(--fuente-titulo);
@@ -2136,22 +2186,25 @@ section header,
   backface-visibility: hidden;
   transform: translateZ(0);
   margin: 0;
-  padding: 0;
+  padding: 0.5rem;
+  box-sizing: border-box;
 }
 
-.galeria-slide video { 
-  max-width: 100%; 
-  max-height: 100%; 
-  width: auto; 
-  height: auto; 
+.galeria-slide video,
+.galeria-slide img,
+.galeria-slide picture {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   display: block;
   object-fit: contain;
+  border-radius: 18px;
+  background-color: #000;
 }
-.galeria-slide img   { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: contain; 
-  display: block;
+
+.galeria-slide video {
+  object-fit: cover;
 }
 
 .carrusel-btn-galeria {
@@ -3160,10 +3213,24 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
 .hero,
 .estadisticas,
 .productos-destacados,
+.galeria,
 .marca,
-.testimonios {
+.testimonios,
+.cta-final {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+}
+
+.hero > *,
+.estadisticas > *,
+.productos-destacados > *,
+.galeria > *,
+.marca > *,
+.testimonios > *,
+.cta-final > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Contenedor de burbujas (se inyectará vía JS) */
@@ -3345,12 +3412,15 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
 
   /* --- 6. GALERÍA (videos) --- */
   .galeria-slide {
-    height: 220px !important;
+    height: 260px !important;
+    padding: 0.25rem !important;
   }
 
   .galeria-slide video,
-  .galeria-slide img {
-    max-height: 180px !important;
+  .galeria-slide img,
+  .galeria-slide picture {
+    max-height: 100% !important;
+    border-radius: 12px !important;
   }
 
   /* --- 7. FAQ --- */

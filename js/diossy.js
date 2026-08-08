@@ -993,8 +993,10 @@ document.addEventListener('DOMContentLoaded', function () {
     '.hero',
     '.estadisticas',
     '.productos-destacados',
+    '.galeria',
     '.marca',
-    '.testimonios'
+    '.testimonios',
+    '.cta-final'
   ];
 
   // Tamaños posibles
