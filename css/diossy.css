@@ -2170,6 +2170,7 @@ section header,
 .galeria-pista {
   display: flex;
   width: 100%;
+  min-width: 100%;
   transition: transform 0.5s ease;
   flex-wrap: nowrap;
   gap: 0;
@@ -2177,12 +2178,11 @@ section header,
 }
 
 .galeria-slide {
+  flex: 0 0 100%;
   width: 100%;
   min-width: 100%;
   height: 520px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   background-color: #111;
   flex-shrink: 0;
   backface-visibility: hidden;
@@ -2196,15 +2196,18 @@ section header,
 .galeria-slide video,
 .galeria-slide img,
 .galeria-slide picture {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block !important;
   object-fit: cover;
   border-radius: 18px;
   background-color: #000;
   flex-shrink: 0;
+  position: relative;
+  left: 0;
+  top: 0;
 }
 
 .carrusel-btn-galeria {
@@ -3309,6 +3312,10 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   .burbuja.medium { width: 4px; height: 4px; animation-duration: 8s; }
   .burbuja.large  { width: 5px; height: 5px; animation-duration: 9s; }
 
+  .burbujas-contenedor {
+    opacity: 0.9;
+  }
+
   /* Colores más suaves en móvil */
   .hero .burbuja,
   .estadisticas .burbuja { background-color: var(--color-verde); opacity: 0.2; }
@@ -3416,6 +3423,8 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
     padding: 0.25rem !important;
     width: 100% !important;
     min-width: 100% !important;
+    flex: 0 0 100% !important;
+    display: block !important;
   }
 
   .galeria-slide video,
@@ -3426,10 +3435,12 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
     max-height: 100% !important;
     border-radius: 12px !important;
     object-fit: cover !important;
+    display: block !important;
   }
 
   .carrusel-galeria {
     max-width: 100% !important;
+    width: 100% !important;
   }
 
   /* --- 7. FAQ --- */
