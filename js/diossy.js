@@ -981,13 +981,14 @@ if (cookieBanner && !localStorage.getItem('diossy-cookies')) {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
 
 // ================================================
 // EFECTO DE BURBUJAS ANIMADAS (ADAPTATIVO)
 // Se ejecuta cuando el DOM está listo
 // ================================================
-document.addEventListener('DOMContentLoaded', function () {
-  // Secciones donde queremos agregar burbujas
+function crearBurbujas() {
   const secciones = [
     '.hero',
     '.estadisticas',
@@ -998,44 +999,47 @@ document.addEventListener('DOMContentLoaded', function () {
     '.cta-final'
   ];
 
-  // Tamaños posibles
   const tamanos = ['tiny', 'small', 'medium', 'large'];
 
   secciones.forEach(selector => {
     const seccion = document.querySelector(selector);
     if (!seccion) return;
 
-    // Crear contenedor de burbujas
+    const contenedorExistente = seccion.querySelector('.burbujas-contenedor');
+    if (contenedorExistente) contenedorExistente.remove();
+
     const contenedor = document.createElement('div');
     contenedor.className = 'burbujas-contenedor';
     contenedor.setAttribute('aria-hidden', 'true');
 
-    // Determinar número de burbujas según ancho de pantalla
     const esMovil = window.innerWidth <= 768;
-      const totalBurbujas = esMovil ? 7 : 15; // 7 en móvil, 15 en escritorio
-        maxDelayIndex = 6;
-      } else {
-        // En escritorio: retrasos de 0 a 7.5s, paso 0.5s → índices 0 a 15
-        maxDelayIndex = 15;
-      }
+    const totalBurbujas = esMovil ? 7 : 15;
+    const maxDelayIndex = esMovil ? 6 : 15;
+
+    for (let i = 0; i < totalBurbujas; i++) {
+      const burbuja = document.createElement('span');
+      burbuja.classList.add('burbuja');
+
+      const tamano = tamanos[Math.floor(Math.random() * tamanos.length)];
+      burbuja.classList.add(tamano);
+
       const delayIndex = Math.floor(Math.random() * (maxDelayIndex + 1));
       burbuja.classList.add(`delay-${delayIndex}`);
 
       contenedor.appendChild(burbuja);
     }
 
-    // Insertar el contenedor al inicio de la sección
     seccion.insertBefore(contenedor, seccion.firstChild);
   });
+}
 
-  // Opcional: recargar burbujas si se rota el dispositivo (ej: de portrait a landscape)
+document.addEventListener('DOMContentLoaded', function () {
+  crearBurbujas();
+
   window.addEventListener('resize', () => {
-    // Evitamos recargar en cada pixel de cambio
     if (window.resizeTimeout) clearTimeout(window.resizeTimeout);
     window.resizeTimeout = setTimeout(() => {
-      location.reload(); // Recarga limpia para reaplicar burbujas según nuevo ancho
-    }, 300);
+      crearBurbujas();
+    }, 250);
   });
 });
-  });
-}
