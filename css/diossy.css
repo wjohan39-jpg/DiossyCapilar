@@ -3151,3 +3151,268 @@ footer hr { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 
   .like-corazon-svg { width: 32px; height: 32px; }
   .like-texto { font-size: 0.8rem; }
 }
+
+/* ================================================
+   BURBUJAS ANIMADAS EN SECCIONES (ADAPTATIVAS: MOBILE + DESKTOP)
+   ================================================ */
+
+/* Aseguramos que las secciones tengan posicionamiento relativo y overflow hidden */
+.hero,
+.estadisticas,
+.productos-destacados,
+.marca,
+.testimonios {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Contenedor de burbujas (se inyectará vía JS) */
+.burbujas-contenedor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Estilo base de cada burbuja */
+.burbuja {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%);
+  animation-name: subir-burbuja;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+/* Animación: subir y desvanecerse */
+@keyframes subir-burbuja {
+  0% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-800px);
+    opacity: 0;
+  }
+}
+
+/* --- TAMAÑOS Y DURACIONES --- */
+/* En escritorio: burbujas normales */
+@media (min-width: 769px) {
+  .burbuja.tiny   { width: 3px; height: 3px; animation-duration: 4s; background-color: var(--color-verde); }
+  .burbuja.small  { width: 5px; height: 5px; animation-duration: 5s; background-color: var(--color-verde); }
+  .burbuja.medium { width: 7px; height: 7px; animation-duration: 6s; background-color: var(--color-verde); }
+  .burbuja.large  { width: 10px; height: 10px; animation-duration: 7s; background-color: var(--color-verde); }
+
+  /* Variación de color en secciones claras */
+  .productos-destacados .burbuja,
+  .marca .burbuja,
+  .testimonios .burbuja { background-color: var(--color-uva); opacity: 0.3; }
+
+  /* Retrasos: 0s a 7.5s, paso 0.5s (16 burbujas posibles) */
+  .burbuja.delay-0  { animation-delay: 0s; }
+  .burbuja.delay-1  { animation-delay: 0.5s; }
+  .burbuja.delay-2  { animation-delay: 1s; }
+  .burbuja.delay-3  { animation-delay: 1.5s; }
+  .burbuja.delay-4  { animation-delay: 2s; }
+  .burbuja.delay-5  { animation-delay: 2.5s; }
+  .burbuja.delay-6  { animation-delay: 3s; }
+  .burbuja.delay-7  { animation-delay: 3.5s; }
+  .burbuja.delay-8  { animation-delay: 4s; }
+  .burbuja.delay-9  { animation-delay: 4.5s; }
+  .burbuja.delay-10 { animation-delay: 5s; }
+  .burbuja.delay-11 { animation-delay: 5.5s; }
+  .burbuja.delay-12 { animation-delay: 6s; }
+  .burbuja.delay-13 { animation-delay: 6.5s; }
+  .burbuja.delay-14 { animation-delay: 7s; }
+  .burbuja.delay-15 { animation-delay: 7.5s; }
+}
+
+/* --- EN MÓVIL Y TABLET (max 768px) --- */
+@media (max-width: 768px) {
+  /* Burbujas más pequeñas, menos opacas y más lentas */
+  .burbuja.tiny   { width: 2px; height: 2px; animation-duration: 6s; }
+  .burbuja.small  { width: 3px; height: 3px; animation-duration: 7s; }
+  .burbuja.medium { width: 4px; height: 4px; animation-duration: 8s; }
+  .burbuja.large  { width: 5px; height: 5px; animation-duration: 9s; }
+
+  /* Colores más suaves en móvil */
+  .hero .burbuja,
+  .estadisticas .burbuja { background-color: var(--color-verde); opacity: 0.2; }
+  .productos-destacados .burbuja,
+  .marca .burbuja,
+  .testimonios .burbuja { background-color: var(--color-uva); opacity: 0.15; }
+
+  /* Menos retrasos: solo 0s a 3s, paso 0.5s (7 burbujas suficientes en móvil) */
+  .burbuja.delay-0  { animation-delay: 0s; }
+  .burbuja.delay-1  { animation-delay: 0.5s; }
+  .burbuja.delay-2  { animation-delay: 1s; }
+  .burbuja.delay-3  { animation-delay: 1.5s; }
+  .burbuja.delay-4  { animation-delay: 2s; }
+  .burbuja.delay-5  { animation-delay: 2.5s; }
+  .burbuja.delay-6  { animation-delay: 3s; }
+}
+
+/* ================================================
+   CORRECCIÓN RESPONSIVA: IMÁGENES EN MÓVIL
+   Evita que se vean descentradas, solapadas o desordenadas
+   ================================================ */
+
+@media (max-width: 768px) {
+  /* --- 1. PRODUCTOS DESTACADOS --- */
+  .productos-destacados .carrusel-pista,
+  .productos-destacados .carrusel-slide {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .productos-destacados .slide-contenido {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: var(--espaciado-m) var(--espaciado-s) !important;
+  }
+
+  .productos-destacados .slide-contenido img {
+    max-width: 80% !important;
+    height: auto !important;
+    margin: 0 auto var(--espaciado-s) !important;
+    display: block !important;
+  }
+
+  .productos-destacados .slide-info {
+    width: 90% !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+  }
+
+  /* --- 2. MARCA --- */
+  .marca .marca-sellos {
+    grid-template-columns: 1fr !important;
+    gap: var(--espaciado-s) !important;
+  }
+
+  .marca .marca-bloque {
+    margin-bottom: var(--espaciado-s) !important;
+  }
+
+  /* --- 3. TESTIMONIOS --- */
+  .testimonios .testimonios-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--espaciado-s) !important;
+  }
+
+  .testimonios .testimonio-card {
+    margin-bottom: var(--espaciado-s) !important;
+  }
+
+  /* --- 4. HERO --- */
+  .hero {
+    text-align: center !important;
+  }
+
+  .hero h1 {
+    font-size: 2rem !important;
+  }
+
+  .hero .subtitulo-linea {
+    font-size: 1.2rem !important;
+  }
+
+  .hero .descripcion {
+    font-size: 1rem !important;
+  }
+
+  /* --- 5. CÓMO FUNCIONA (pasos) --- */
+  .pasos-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--espaciado-s) !important;
+  }
+
+  .paso-flecha {
+    display: none !important;
+  }
+
+  .paso-item {
+    margin-bottom: var(--espaciado-s) !important;
+  }
+
+  /* --- 6. GALERÍA (videos) --- */
+  .galeria-slide {
+    height: 220px !important;
+  }
+
+  .galeria-slide video,
+  .galeria-slide img {
+    max-height: 180px !important;
+  }
+
+  /* --- 7. FAQ --- */
+  .faq-pregunta {
+    font-size: 0.9rem !important;
+    padding: var(--espaciado-s) !important;
+  }
+
+  .faq-respuesta {
+    font-size: 0.875rem !important;
+    padding: 0 var(--espaciado-s) var(--espaciado-m) !important;
+  }
+
+  /* --- 8. CTA FINAL --- */
+  .cta-final {
+    text-align: center !important;
+  }
+
+  .cta-final h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .cta-final p {
+    font-size: 1rem !important;
+  }
+
+  /* --- 9. FOOTER --- */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--espaciado-s) !important;
+  }
+
+  .footer-contacto,
+  .footer-info,
+  .footer-nav {
+    text-align: center !important;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  /* --- 10. IMÁGENES Y VIDEOS GLOBALES --- */
+  img,
+  video {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  /* --- 11. ANCHOS FIJOS QUE ROMPEN EL LAYOUT --- */
+  *[style*="width: 1000px"],
+  *[style*="max-width: 1000px"],
+  *[style*="width: 860px"],
+  *[style*="max-width: 860px"] {
+    max-width: 100% !important;
+    width: auto !important;
+  }
+
+  /* --- 12. EVITAR SCROLL HORIZONTAL --- */
+  html, body {
+    overflow-x: hidden !important;
+  }
+}
